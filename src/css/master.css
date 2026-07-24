@@ -1,0 +1,64 @@
+/* Google Fonts: Poppins */
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
+
+body {
+  background: linear-gradient(45deg, crimson, black);
+  color: #fff;
+  font-family: Poppins, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100dvh;
+  main {
+    background-color: linear-gradient (to buttom, #0009, #0000);
+    border-radius: 0.4rem;
+    min-width: 380px;
+    padding: 1rem;
+  }
+  /* Main Menú */
+  &.mainmenu {
+    main {
+        header{
+            h1{
+                border-bottom: 2px solid #fff9;
+                font-size: 3.2rem;
+                font-weight: 350;
+                text-align: center;
+            }
+            img{
+                border: 4px solid #fff9
+                border-radius 50%;
+                display: flex;
+                height: 280px;
+                margin: 0 auto;
+                object-fit: cover;
+                object-position: center;
+                width: 280px;
+            }
+            h2{
+                text-transform: uppercase;
+                text-align: center;
+                font-weight: 500;
+                margin: 0;
+            }
+            h3{
+                font-weight: 400;
+                text-align: center;
+                margin: 0;
+            }
+            h4{
+                font-weight: 300;
+                font-size: 0.8rem;
+                margin: 0;
+                text-align: center;
+            }
+            h5{
+                font-size: 0.8rem;
+                font-weight: 500;
+                margin: 0;
+                text-align: center;
+            }
+        }
+    }
+  }
+}
