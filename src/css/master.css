@@ -4,16 +4,77 @@
 
 body {
     align-items: center;
-    background: linear-gradient(45deg, #da70d6, black);
+    background: linear-gradient(45deg, #ED2100, black);
     color: #fff9;
     display: flex;
     font-family: Poppins, serif;
     justify-content: center;
     min-height: 100dvh;
+
+    nav.back {
+        align-items: center;
+        border: 2px solid #fff;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        height: 40px;
+        left: 8px;
+        opacity: .6;
+        padding: 0.4rem;
+        position: fixed;
+        top: 8px;
+        transform: scale(.8);
+        transition: transform 0.4s ease-in,
+                    opacity 0.4s 0.4s ease-in;
+        width: 40px;
+        &:hover {
+            transform: scale(1.1);
+            opacity: 1;
+        }
+        a:is(:link, :visited) {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    }
+
+    &.mainmenu.layout {
+         background: linear-gradient(45deg, #ED2100, black);
+         main {
+            header {
+                h1 {
+                    margin: 0;
+                }
+                h3 {
+                    font-weight: 200;
+                }
+                img {
+                    background-color: #0003;
+                }
+            }
+            menu {
+                gap: 0.4rem;
+                a:is(:link, :visited) {
+                    span {
+                        background-color: #960018;
+                    }
+                    aside {
+                        h3 {
+                            font-size: 1rem;
+                        }
+                    }
+                    &:is(:hover) {
+                        background-color: #960018;
+                    }
+                }
+            }
+         }
+    }
+
     main {
         background: linear-gradient(to bottom, #0009, #0000);
         border-radius: 0.4rem;
-        min-width: 380px;
+        max-width: 380px;
         padding: 1rem;
     }
     /* Main Menu */
@@ -75,15 +136,16 @@ body {
                     display: flex;
                     padding: 0.6rem;
                     text-decoration:none;
-                    transition: all 0.4s ease-in;
+                    transition: transform 0.4s ease-in,
+                                background 0.4s 0.2s ease-in;
                     width: 320px;
                     &:is(:hover) {
-                        background-color: #ee82ee;
+                        background-color: crimson;
                         transform: scale(1.04) translateX(18px);
                     }
                     span {
                         align-items: center;
-                        background-color: #ee82ee;
+                        background-color: crimson;
                         border-radius: 50%;
                         display: flex;
                         justify-content: center;
@@ -93,7 +155,7 @@ body {
                         width: 60px;
                     }
                     &:hover span {
-                        background-color: #ba55d3;
+                        background-color: #0009;
                     }
                     aside {
                         margin-left: 0.6rem;
