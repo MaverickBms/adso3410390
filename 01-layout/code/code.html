@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="PIT STOP CAFÉ BAR — Café de especialidad y motorsport. Vive la pasión de la Fórmula 1 con café calibrado al milisegundo.">
+    <title>PIT STOP CAFÉ BAR</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poetsen+One&family=Teko:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="src/css/style.css">
+</head>
+<body>
+    <div class="page">
+
+        <!-- ================= HEADER ================= -->
+        <header class="header" id="inicio">
+            <a class="brand" href="#inicio" aria-label="Pit Stop Café Bar">
+                <img class="brand__mark" src="src/imgs/logo.png" alt="" width="66" height="66">
+                <span class="brand__name">PIT STOP<em>CAFÉ BAR</em></span>
+            </a>
+
+            <nav class="nav" id="primary-nav" aria-label="Principal">
+                <a href="#inicio">INICIO</a>
+                <a href="#menu">MENÚ</a>
+                <a href="#eventos">EVENTOS</a>
+                <a href="#ubicacion">UBICACIÓN</a>
+            </nav>
+
+            <div class="header__right">
+                <span class="live-tag"><span class="dot dot--red"></span>LAP 01 / LIVE</span>
+                <a class="btn btn--primary" href="#reservas">RESERVAS</a>
+                <button class="nav-toggle" aria-label="Abrir menú" aria-controls="primary-nav" aria-expanded="false">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
+        </header>
+
+        <main>
+
+            <!-- ================= HERO ================= -->
+            <section class="hero">
+                <div class="hero__panel">
+                    <p class="eyebrow eyebrow--live"><span class="dot dot--red"></span>PIT STOP / SECTOR 1 CONTROL CARRERAS</p>
+                    <h1 class="hero__title">
+                        <span>VIVE LA PASIÓN DE</span>
+                        <span>LA FÓMULA 1</span>
+                    </h1>
+                    <p class="hero__lead">Café de Especialidad, buena música y toda la emoción de las pistas.</p>
+                    <div class="hero__actions">
+                        <a class="btn btn--primary" href="#reservas">RESERVA TU MESA</a>
+                        <a class="btn btn--ghost" href="#menu">VER MENÚ
+                            <svg class="ico" viewBox="0 0 19.233 15" aria-hidden="true"><use href="#ico-arrow"></use></svg>
+                        </a>
+                    </div>
+
+                    <div class="hero__stats">
+                        <div class="stat">
+                            <span class="stat__value">24</span>
+                            <span class="stat__label">RACES/SEASON</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat__value stat__value--count" data-countdown="240">04:00</span>
+                            <span class="stat__label">NEXT EVENT</span>
+                        </div>
+                        <div class="stat stat--status">
+                            <span class="stat__value stat__value--live"><span class="dot dot--red"></span>LIVE</span>
+                            <span class="stat__label">STATUS</span>
+                        </div>
+                    </div>
+
+                    <div class="hero__foot">
+                        <span class="hero__scroll">SCROLL TO EXPLORE
+                            <svg class="ico ico--down" viewBox="0 0 6.73 9" aria-hidden="true"><path d="M3.365 0v7.5m0 0 2.6-2.6m-2.6 2.6L.76 4.9" fill="none" stroke="currentColor" stroke-width="1"/></svg>
+                        </span>
+                        <span class="hero__count">01 / 20 — START</span>
+                    </div>
+                </div>
+
+                <div class="hero__media">
+                    <img src="src/imgs/hero-race.png" alt="Café y motorsport en Pit Stop Café Bar">
+                    <div class="hero__timer">
+                        <span class="hero__timer-value">2:28.410</span>
+                        <span class="hero__timer-label">FASTEST LAP — HOUSE RECORD</span>
+                    </div>
+                    <div class="hero__sector">
+                        <span class="hero__sector-title">FINISH</span>
+                        <span class="hero__sector-sub">STRAIGHT — 200 M</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ================= INTRO ================= -->
+            <section class="section section--intro">
+                <p class="eyebrow">PIT STOP / EST. 2026 / COFFEE MOTORSPORT.</p>
+                <h2 class="title title--xl">
+                    <span>MÁS QUE UN CAFÉ.</span>
+                    <span>UNA EXPERIENCIA</span>
+                    <span class="title__accent">DE CARRERA.</span>
+                </h2>
+                <p class="lead">Un pit lane para tus sentidos: café de especialidad calibrado al milisegundo, barra de autor y la comunidad más rápida de la ciudad.</p>
+
+                <div class="laptrack">
+                    <span class="laptrack__dash">---</span>
+                    <span class="chip chip--live"><span class="dot dot--red"></span>START</span>
+                    <span class="laptrack__meta">LAP 01 / SECTOR 1</span>
+                    <span class="laptrack__bar"></span>
+                    <span class="laptrack__dash">---</span>
+                    <span class="laptrack__meta laptrack__meta--end"><strong>FINISH</strong><small>STRAIGHT — 200 M</small></span>
+                </div>
+            </section>
+
+            <!-- ================= MENU ================= -->
+            <section class="section section--menu" id="menu">
+                <div class="section__head">
+                    <div>
+                        <p class="eyebrow">02 — PIT MENÚ // FUEL FOR YOUR RACE</p>
+                        <h2 class="title">NUESTRO MENÚ</h2>
+                    </div>
+                    <div class="section__head-right">
+                        <p class="lead lead--sm">Cuatro boxes. Cero paradas lentas. Todo servido con precisión de pit crew.</p>
+                        <a class="link-arrow" href="#carta">VER CARTA COMPLETA
+                            <svg class="ico ico--sm" viewBox="0 0 19.233 15" aria-hidden="true"><use href="#ico-arrow"></use></svg>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="menu-grid">
+                    <article class="menu-feature">
+                        <img class="menu-feature__img" src="src/imgs/menu-coffee.png" alt="Cafés de especialidad">
+                        <span class="menu-num">01</span>
+                        <div class="menu-feature__body">
+                            <h3 class="menu-feature__title">CAFÉS</h3>
+                            <p class="menu-feature__desc">Espresso de especialidad, métodos filtrados y bebidas calientes de temporada.</p>
+                            <div class="menu-feature__row">
+                                <a class="btn btn--primary btn--pill" href="#carta">EXPLORE
+                                    <svg class="ico ico--sm" viewBox="0 0 19.233 15" aria-hidden="true"><use href="#ico-arrow"></use></svg>
+                                </a>
+                                <span class="muted">18 OPCIONES</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <div class="menu-col">
+                        <article class="menu-item">
+                            <span class="menu-num menu-num--sm">03</span>
+                            <div class="menu-item__text">
+                                <h3 class="menu-item__title">BEBIDAS</h3>
+                                <p class="muted">Cócteles, mocktails y frías.</p>
+                                <a class="link-arrow link-arrow--sm" href="#carta">EXPLORE
+                                    <svg class="ico ico--sm" viewBox="0 0 19.233 15" aria-hidden="true"><use href="#ico-arrow"></use></svg>
+                                </a>
+                            </div>
+                            <img class="menu-item__img" src="src/imgs/menu-bebidas.png" alt="Bebidas">
+                        </article>
+
+                        <article class="menu-item">
+                            <div class="menu-item__text">
+                                <h3 class="menu-item__title">COMIDA</h3>
+                                <p class="muted">Platos y snacks para compartir.</p>
+                                <a class="link-arrow link-arrow--sm" href="#carta">EXPLORE
+                                    <svg class="ico ico--sm" viewBox="0 0 19.233 15" aria-hidden="true"><use href="#ico-arrow"></use></svg>
+                                </a>
+                            </div>
+                            <img class="menu-item__img" src="src/imgs/menu-comida.png" alt="Comida">
+                        </article>
+                    </div>
+
+                    <article class="menu-combo">
+                        <img class="menu-combo__img" src="src/imgs/menu-combo.png" alt="Combo F1">
+                        <span class="chip chip--limited">LIMITED — RACE WEEK</span>
+                        <span class="menu-num menu-num--sm">04</span>
+                        <h3 class="menu-combo__title">COMBO <span>F1</span></h3>
+                        <p class="menu-combo__desc">Combos inspirados en cada gran premio. Solo durante la carrera.</p>
+                        <a class="btn btn--outline btn--pill" href="#carta">VER COMBOS
+                            <svg class="ico ico--sm" viewBox="0 0 19.233 15" aria-hidden="true"><use href="#ico-arrow"></use></svg>
+                        </a>
+                    </article>
+                </div>
+            </section>
+
+            <!-- ================= EVENTS ================= -->
+            <section class="section section--events" id="eventos">
+                <p class="eyebrow"><span class="dot dot--red"></span>03 - RACE CONTROL // TIMING BOARD</p>
+                <h2 class="title">RACE WEEKEND</h2>
+
+                <div class="events-grid">
+                    <article class="event-main">
+                        <img class="event-main__img" src="src/imgs/event-main.png" alt="Race weekend en Pit Stop">
+                        <div class="event-main__top">
+                            <span class="chip chip--red">FEATURED — P1</span>
+                            <span class="chip chip--ghost">LIVE VIEWING</span>
+                        </div>
+                        <span class="event-main__gp-num">24</span>
+                        <div class="event-main__info">
+                            <h3 class="event-main__title">GRAN PREMIO SINGAPUR</h3>
+                            <p class="muted muted--sm">Watch party · Pantalla 4K · Sonido envolvente · Combo Checo</p>
+                            <div class="event-main__meta">
+                                <span class="event-pill"><strong>20:00</strong> — MAIN RACE</span>
+                                <span class="event-pill"><span class="dot dot--red"></span>142 / 180 SEATS</span>
+                            </div>
+                        </div>
+                        <div class="event-main__cta">
+                            <span class="date-badge">OCT</span>
+                            <a class="btn btn--primary btn--pill" href="#eventos">VIEW EVENT</a>
+                        </div>
+                    </article>
+
+                    <div class="events-col">
+                        <article class="event-card">
+                            <img class="event-card__img" src="src/imgs/event-01.png" alt="Clasificación y qualy night">
+                            <div class="event-card__body">
+                                <span class="event-card__num">25</span>
+                                <h4 class="event-card__title">CLASIFICACIÓN + QUALY NIGHT</h4>
+                                <span class="event-card__meta">OCT · 18:00 — Q1 Q2 Q3</span>
+                                <a class="link-arrow link-arrow--sm" href="#eventos">VIEW EVENT
+                                    <svg class="ico ico--sm" viewBox="0 0 19.233 15" aria-hidden="true"><use href="#ico-arrow"></use></svg>
+                                </a>
+                            </div>
+                        </article>
+                        <article class="event-card">
+                            <img class="event-card__img" src="src/imgs/event-02.png" alt="Race replay and brunch">
+                            <div class="event-card__body">
+                                <span class="event-card__num">26</span>
+                                <h4 class="event-card__title">RACE REPLAY &amp; BRUNCH</h4>
+                                <span class="event-card__meta">OCT · 12:00 — SLOW SUNDAY</span>
+                                <a class="link-arrow link-arrow--sm" href="#eventos">VIEW EVENT
+                                    <svg class="ico ico--sm" viewBox="0 0 19.233 15" aria-hidden="true"><use href="#ico-arrow"></use></svg>
+                                </a>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+
+                <div class="timing-strip">
+                    <span class="timing-strip__sector">SECTOR 01 <b>28.410</b></span>
+                    <span class="timing-strip__sector">SECTOR 02 <b>32.118</b></span>
+                    <span class="timing-strip__sector timing-strip__sector--purple">SECTOR 03 <b>27.882</b> — PURPLE</span>
+                    <span class="timing-strip__next">NEXT: GP EUA — 09 NOV</span>
+                    <span class="timing-strip__pos">01/20</span>
+                </div>
+            </section>
+
+            <!-- ================= EDITORIAL ================= -->
+            <section class="section section--editorial">
+                <p class="eyebrow">04 — THE RACING SPIRIT</p>
+                <div class="editorial">
+                    <div class="editorial__words">
+                        <span class="bigword">PRECISION</span>
+                        <span class="bigword">SPEED</span>
+                        <span class="bigword">PASSION</span>
+                        <span class="bigword">CRAFT</span>
+                        <p class="editorial__copy">El Café como un pit stop: exacto, rápido y ritual. Cada taza calibrada al milisegundo.</p>
+                        <div class="editorial__stats">
+                            <div class="stat stat--editorial">
+                                <span class="stat__value stat__value--gold">19g/36g</span>
+                                <span class="stat__label">DOSE RATIO</span>
+                            </div>
+                            <div class="stat stat--editorial">
+                                <span class="stat__value stat__value--gold">1.8 BAR</span>
+                                <span class="stat__label">STEAM PRESSURE</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="editorial__media">
+                        <img class="editorial__img editorial__img--a" src="src/imgs/editorial-01.png" alt="Detalle de café">
+                        <img class="editorial__img editorial__img--b" src="src/imgs/editorial-02.png" alt="Barista en acción">
+                        <figure class="pitwall">
+                            <figcaption class="pitwall__label">PIT WALL NOTE</figcaption>
+                            <blockquote class="pitwall__quote">“El Café, como la carrera se gana en los detalles”</blockquote>
+                            <span class="pitwall__author">— HEAD BARISTA / RACE ENGINER</span>
+                        </figure>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ================= LOCATION ================= -->
+            <section class="section section--location" id="ubicacion">
+                <div class="location">
+                    <div class="location__media">
+                        <img class="location__map" src="src/imgs/location-map.png" alt="Mapa de ubicación">
+                        <span class="map-chip map-chip--coords">5.076961º N — 99.1332º W</span>
+                        <span class="map-chip map-chip--here"><span class="dot dot--white"></span>P1 — Here we are.</span>
+                        <span class="map-chip map-chip--dist">Manizales — 1.5 KM <b>10 MIN</b></span>
+                    </div>
+
+                    <div class="location__info">
+                        <p class="eyebrow">05 — VISÍTANOS / PIT LANE ENTRY</p>
+                        <h2 class="title">VISÍTANOS</h2>
+                        <p class="location__name">PIT STOP CAFÉ BAR</p>
+                        <dl class="location__list">
+                            <div>
+                                <dt>DIRECCIÓN</dt>
+                                <dd>9259 Av 12 de Octubre, Manizales, Caldas.</dd>
+                            </div>
+                            <div>
+                                <dt>HORARIO</dt>
+                                <dd>Lun - Dom 8:00 — 00:00 · Race days 24h.</dd>
+                            </div>
+                            <div>
+                                <dt>TELÉFONO</dt>
+                                <dd>+57 0000000000</dd>
+                            </div>
+                        </dl>
+                        <div class="location__actions">
+                            <a class="btn btn--outline" href="#ubicacion">COMO LLEGAR
+                                <svg class="ico ico--sm" viewBox="0 0 19.233 15" aria-hidden="true"><use href="#ico-arrow"></use></svg>
+                            </a>
+                            <a class="btn btn--primary" href="#reservas">RESERVA TU MESA</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ================= SOCIAL ================= -->
+            <section class="section section--social" id="reservas">
+                <div class="social__head">
+                    <h2 class="title">SIGUE LA CARRERA</h2>
+                    <p class="lead lead--sm">Más Café. Más motorsport. Más experiencias.</p>
+                </div>
+
+                <div class="social-grid">
+                    <a class="social-card social-card--wide" href="#" aria-label="Instagram">
+                        <img class="social-card__img" src="src/imgs/social-instagram.png" alt="">
+                        <span class="chip chip--ghost social-card__badge">INTAGRAM — 48K</span>
+                        <span class="social-card__handle">@pitstop.cafebar</span>
+                    </a>
+
+                    <a class="social-card social-card--stat" href="#" aria-label="TikTok">
+                        <span class="social-card__title">TikTok</span>
+                        <span class="social-card__big">120K</span>
+                        <span class="muted muted--sm">Pit stops en 15s</span>
+                        <span class="link-arrow link-arrow--sm">FOLLOW
+                            <svg class="ico ico--sm" viewBox="0 0 19.233 15" aria-hidden="true"><use href="#ico-arrow"></use></svg>
+                        </span>
+                    </a>
+
+                    <a class="social-card social-card--yt" href="#" aria-label="YouTube">
+                        <img class="social-card__img" src="src/imgs/social-youtube.png" alt="">
+                        <span class="chip chip--ghost social-card__badge">YOUTUBE</span>
+                        <span class="muted muted--sm">Race debriefs cada lunes</span>
+                    </a>
+
+                    <div class="social-card social-card--fb">
+                        <span class="social-card__title">Facebook</span>
+                        <span class="muted muted--sm">Eventos y Comunidad</span>
+                    </div>
+
+                    <div class="social-card social-card--wa">
+                        <span class="social-card__title">WhatsApp Channel</span>
+                        <span class="muted muted--sm">Alineación cada GP / Únete y sé parte de nuestra comunidad</span>
+                        <a class="btn btn--primary btn--pill" href="#">JOIN</a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ================= FOOTER ================= -->
+            <footer class="footer">
+                <div class="footer__top">
+                    <div class="footer__brand">
+                        <p class="footer__logo">PIT STOP<em>CAFÉ BAR</em></p>
+                        <p class="muted">Un café/bar premium que vive dentro del universo del motorsport.</p>
+                    </div>
+                    <div class="footer__col">
+                        <span class="footer__label">RACE CONTROL</span>
+                        <span class="footer__label">NEXT RACE</span>
+                        <span class="footer__value">COLOMBIA — 09 NOV</span>
+                    </div>
+                    <div class="footer__col">
+                        <span class="footer__label">CONTACTO</span>
+                        <a class="footer__value" href="mailto:pitstopgestiones@gmail.com">pitstopgestiones@gmail.com</a>
+                        <a class="footer__value" href="tel:+570000000000">+57 0000000000</a>
+                    </div>
+                    <div class="footer__cta">
+                        <a class="btn btn--primary footer__reserva" href="#reservas">RESERVA TU MESA</a>
+                    </div>
+                </div>
+                <div class="footer__bottom">
+                    <span class="muted muted--xs"><span class="dot dot--white"></span>2026 PIT STOP CAFÉ BAR. TODOS LOS DERECHOS RESERVADOS</span>
+                    <span class="muted muted--xs">LAP 01 — SECTOR 01 — P1</span>
+                </div>
+            </footer>
+
+        </main>
+    </div>
+
+    <!-- Inline icon sprite -->
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+        <symbol id="ico-arrow" viewBox="0 0 19.233 15">
+            <path d="M11.2188 0.5C11.3091 0.5 11.3899 0.53401 11.4443 0.584961L18.6562 7.33398V7.33496C18.6828 7.35978 18.7024 7.38706 18.7148 7.41504C18.7272 7.44299 18.7334 7.47193 18.7334 7.5C18.7334 7.52807 18.7272 7.55701 18.7148 7.58496C18.7024 7.61294 18.6828 7.64022 18.6562 7.66504V7.66602L11.4443 14.415C11.3899 14.466 11.3091 14.5 11.2188 14.5C11.1285 14.5 11.0476 14.466 10.9932 14.415C10.9402 14.3653 10.9171 14.3051 10.917 14.25C10.917 14.1948 10.94 14.1339 10.9932 14.084L16.8389 8.61523L17.7627 7.75H0.801758C0.711535 7.75 0.63053 7.71591 0.576172 7.66504C0.523077 7.61525 0.5 7.55513 0.5 7.5C0.5 7.44487 0.523077 7.38475 0.576172 7.33496C0.630531 7.28409 0.711536 7.25 0.801758 7.25H17.7627L16.8389 6.38477L10.9932 0.916016C10.94 0.866144 10.917 0.80525 10.917 0.75C10.9171 0.694892 10.9402 0.634699 10.9932 0.584961C11.0476 0.534035 11.1285 0.500032 11.2188 0.5Z" fill="currentColor"/>
+        </symbol>
+    </svg>
+
+    <script src="src/js/script.js"></script>
+</body>
+</html>
