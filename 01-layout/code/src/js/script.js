@@ -16,6 +16,7 @@
             toggle.classList.toggle('is-active', open);
             toggle.setAttribute('aria-expanded', String(open));
             toggle.setAttribute('aria-label', open ? 'Cerrar menú' : 'Abrir menú');
+            document.body.classList.toggle('nav-open', open);
         });
 
         nav.addEventListener('click', function (e) {
@@ -23,6 +24,16 @@
                 nav.classList.remove('is-open');
                 toggle.classList.remove('is-active');
                 toggle.setAttribute('aria-expanded', 'false');
+                document.body.classList.remove('nav-open');
+            }
+        });
+
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape' && nav.classList.contains('is-open')) {
+                nav.classList.remove('is-open');
+                toggle.classList.remove('is-active');
+                toggle.setAttribute('aria-expanded', 'false');
+                document.body.classList.remove('nav-open');
             }
         });
     }
@@ -87,6 +98,7 @@
     }
 
     /* ---------- Contador / cuenta atrás del hero ---------- */
+    var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     var countdown = document.querySelector('[data-countdown]');
     if (countdown) {
         var remaining = parseInt(countdown.getAttribute('data-countdown'), 10) || 240;
@@ -98,15 +110,17 @@
         };
         render();
 
-        setInterval(function () {
-            remaining = remaining > 0 ? remaining - 1 : 240;
-            render();
-        }, 1000);
+        if (!reduceMotion) {
+            setInterval(function () {
+                remaining = remaining > 0 ? remaining - 1 : 240;
+                render();
+            }, 1000);
+        }
     }
 
     /* ---------- Animación del cronómetro de vuelta ---------- */
     var timer = document.querySelector('.hero__timer-value');
-    if (timer && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    if (timer && !reduceMotion) {
         var base = 148.410; // 2:28.410
         var tick = setInterval(function () {
             base += 0.017;
