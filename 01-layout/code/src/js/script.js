@@ -147,35 +147,69 @@
     var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     var countdown = document.querySelector('[data-countdown]');
     if (countdown) {
-        var remaining = parseInt(countdown.getAttribute('data-countdown'), 10) || 240;
+        var initialCountdown = parseInt(countdown.getAttribute('data-countdown'), 10) || 240;
+        var remaining = initialCountdown;
 
-        var render = function () {
+        var renderCountdown = function () {
             var m = Math.floor(remaining / 60);
             var s = remaining % 60;
             countdown.textContent = ('0' + m).slice(-2) + ':' + ('0' + s).slice(-2);
         };
-        render();
+        renderCountdown();
 
         if (!reduceMotion) {
-            setInterval(function () {
-                remaining = remaining > 0 ? remaining - 1 : 240;
-                render();
+            var countdownTimer = setInterval(function () {
+                remaining = remaining > 0 ? remaining - 1 : initialCountdown;
+                renderCountdown();
             }, 1000);
+
+            window.addEventListener('pagehide', function () { clearInterval(countdownTimer); });
         }
     }
 
     /* ---------- Animación del cronómetro de vuelta ---------- */
     var timer = document.querySelector('.hero__timer-value');
     if (timer && !reduceMotion) {
-        var base = 148.410; // 2:28.410
-        var tick = setInterval(function () {
-            base += 0.017;
-            if (base > 200) { base = 148.410; }
-            var m = Math.floor(base / 60);
-            var s = (base % 60).toFixed(3);
-            timer.textContent = m + ':' + (s < 10 ? '0' + s : s);
-        }, 60);
+        var targetLap = 150.250; // 2:30.250
+        var startLap = 148.410; // 2:28.410
+        var lapValue = startLap;
+        var timerStart = window.performance ? performance.now() : Date.now();
+        var timerDuration = 2200;
 
-        window.addEventListener('pagehide', function () { clearInterval(tick); });
+        function formatLap(value) {
+            var totalSeconds = Math.max(0, value);
+            var minutes = Math.floor(totalSeconds / 60);
+            var seconds = Math.floor(totalSeconds % 60);
+            var ms = Math.round((totalSeconds - Math.floor(totalSeconds)) * 1000);
+            return minutes + ':' + ('0' + seconds).slice(-2) + '.' + ('00' + ms).slice(-3);
+        }
+
+        function renderLap(value) {
+            timer.textContent = formatLap(value);
+        }
+
+        renderLap(lapValue);
+
+        var lapTick = setInterval(function () {
+            var now = window.performance ? performance.now() : Date.now();
+            var progress = Math.min((now - timerStart) / timerDuration, 1);
+            var eased = 1 - Math.pow(1 - progress, 3);
+            lapValue = startLap + (targetLap - startLap) * eased;
+            renderLap(lapValue);
+
+            if (progress >= 1) {
+                clearInterval(lapTick);
+                lapValue = targetLap;
+                renderLap(lapValue);
+                timer.classList.add('is-finished');
+                timer.closest('.hero__timer').classList.add('hero__timer--finished');
+                setTimeout(function () {
+                    timer.classList.remove('is-finished');
+                    timer.closest('.hero__timer').classList.remove('hero__timer--finished');
+                }, 2200);
+            }
+        }, 30);
+
+        window.addEventListener('pagehide', function () { clearInterval(lapTick); });
     }
 })();
