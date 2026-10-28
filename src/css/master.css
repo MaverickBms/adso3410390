@@ -480,6 +480,7 @@ main header h5 {
    MENU
    ========================================================= */
 
+main nav ul,
 main menu {
 
     display: flex;
@@ -487,6 +488,8 @@ main menu {
     flex-direction: column;
 
     gap: 0.75rem;
+
+    list-style: none;
 
     margin: 2rem 0 0;
 
@@ -498,6 +501,7 @@ main menu {
    MENU ITEMS
    ========================================================= */
 
+main nav ul a:is(:link, :visited),
 main menu a:is(:link, :visited) {
 
     align-items: center;
@@ -542,6 +546,7 @@ main menu a:is(:link, :visited) {
    HOVER MENU
    ========================================================= */
 
+main nav ul a:is(:link, :visited):hover,
 main menu a:is(:link, :visited):hover {
 
     background:
@@ -564,6 +569,7 @@ main menu a:is(:link, :visited):hover {
    NUMBER / ICON
    ========================================================= */
 
+main nav ul a span,
 main menu a span {
 
     align-items: center;
@@ -601,6 +607,7 @@ main menu a span {
 }
 
 
+main nav ul a:hover span,
 main menu a:hover span {
 
     background:
@@ -618,6 +625,7 @@ main menu a:hover span {
    MENU TEXT
    ========================================================= */
 
+main nav ul a aside,
 main menu a aside {
 
     align-items: flex-start;
@@ -636,6 +644,7 @@ main menu a aside {
 }
 
 
+main nav ul a aside h3,
 main menu a aside h3 {
 
     color: var(--white);
@@ -650,6 +659,7 @@ main menu a aside h3 {
 }
 
 
+main nav ul a aside small,
 main menu a aside small {
 
     color: var(--white-muted);
@@ -668,6 +678,7 @@ main menu a aside small {
    ARROW DE LOS BOTONES DEL MENÚ
    ========================================================= */
 
+main nav ul a::after,
 main menu a::after {
 
     color: rgba(255, 255, 255, 0.45);
@@ -688,6 +699,7 @@ main menu a::after {
 }
 
 
+main nav ul a:hover::after,
 main menu a:hover::after {
 
     color: var(--white);
@@ -735,6 +747,7 @@ body.mainmenu.layout main menu {
 }
 
 
+body.mainmenu.layout main nav ul a span,
 body.mainmenu.layout main menu a span {
 
     background:
