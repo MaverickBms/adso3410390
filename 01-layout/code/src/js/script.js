@@ -77,25 +77,71 @@
         revealEls.forEach(function (el) { el.classList.add('is-visible'); });
     }
 
-    /* ---------- Sección activa en la nav ---------- */
+    /* ---------- Sección activa en la nav ----------
+       El <header> es sticky: su rect queda siempre pegado arriba y nunca entra
+       en la banda de un IntersectionObserver, por eso #inicio no se activaba.
+       Se resuelve con un scroll-spy: la línea de decisión es el punto donde
+       aterriza una sección al navegar por anclas y la sección activa es la
+       última que la ha rebasado. Para INICIO la referencia es el Hero
+       (la sección real de inicio). */
     var navLinks = Array.prototype.slice.call(document.querySelectorAll('.nav a[href^="#"]'));
-    var sections = navLinks
-        .map(function (a) { return document.querySelector(a.getAttribute('href')); })
-        .filter(Boolean);
 
-    if ('IntersectionObserver' in window && sections.length) {
-        var activeObserver = new IntersectionObserver(function (entries) {
-            entries.forEach(function (entry) {
-                if (entry.isIntersecting) {
-                    navLinks.forEach(function (a) {
-                        a.classList.toggle('is-active', a.getAttribute('href') === '#' + entry.target.id);
-                    });
-                }
-            });
-        }, { rootMargin: '-45% 0px -45% 0px' });
-
-        sections.forEach(function (s) { activeObserver.observe(s); });
+    function spyTarget(link) {
+        var id = link.getAttribute('href').slice(1);
+        if (!id) { return null; }
+        if (id === 'inicio') {
+            return document.querySelector('.hero') || document.getElementById(id);
+        }
+        return document.getElementById(id);
     }
+
+    var spyTargets = navLinks.map(spyTarget).filter(Boolean);
+
+    function setActive(target) {
+        navLinks.forEach(function (a) {
+            var isActive = spyTarget(a) === target;
+            a.classList.toggle('is-active', isActive);
+            if (isActive) {
+                a.setAttribute('aria-current', 'true');
+            } else {
+                a.removeAttribute('aria-current');
+            }
+        });
+    }
+
+    function updateActive() {
+        if (!spyTargets.length) { return; }
+        /* La línea de decisión coincide con el punto donde aterriza una sección
+           al navegar por anclas (scroll-padding-top), de modo que la sección
+           visible es siempre la activa. */
+        var pad = parseFloat(getComputedStyle(document.documentElement).scrollPaddingTop) || 0;
+        var line = window.pageYOffset + pad + 1;
+        var current = spyTargets[0];
+
+        for (var i = 0; i < spyTargets.length; i++) {
+            var top = spyTargets[i].getBoundingClientRect().top + window.pageYOffset;
+            if (top <= line) {
+                current = spyTargets[i];
+            } else {
+                break;
+            }
+        }
+        setActive(current);
+    }
+
+    var scrollPending = false;
+    window.addEventListener('scroll', function () {
+        if (scrollPending) { return; }
+        scrollPending = true;
+        window.requestAnimationFrame(function () {
+            scrollPending = false;
+            updateActive();
+        });
+    }, { passive: true });
+
+    window.addEventListener('resize', updateActive);
+    window.addEventListener('load', updateActive);
+    updateActive();
 
     /* ---------- Contador / cuenta atrás del hero ---------- */
     var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;

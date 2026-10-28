@@ -7,22 +7,22 @@
     <title>PIT STOP CAFÉ BAR</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poetsen+One&family=Teko:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;family=Poetsen+One&amp;family=Teko:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
     <link rel="stylesheet" href="src/css/style.css">
 </head>
 <body>
     <a class="skip-link" href="#menu">Saltar al contenido principal</a>
+    <span id="inicio" class="anchor-top" aria-hidden="true"></span>
     <div class="page">
 
         <!-- ================= HEADER ================= -->
-        <header class="header" id="inicio">
+        <header class="header">
             <a class="brand" href="#inicio" aria-label="Pit Stop Café Bar">
-                <img class="brand__mark" src="src/imgs/logo.png" alt="" width="66" height="66">
-                <span class="brand__name">PIT STOP<em>CAFÉ BAR</em></span>
+                <img class="brand__mark" src="src/imgs/logoPITSTOP.png" alt="" width="130" height="62">
             </a>
 
             <nav class="nav" id="primary-nav" aria-label="Principal">
-                <a href="#inicio">INICIO</a>
+                <a href="#inicio" aria-current="true">INICIO</a>
                 <a href="#menu">MENÚ</a>
                 <a href="#eventos">EVENTOS</a>
                 <a href="#ubicacion">UBICACIÓN</a>
@@ -45,12 +45,12 @@
                     <p class="eyebrow eyebrow--live"><span class="dot dot--red"></span>PIT STOP / SECTOR 1 CONTROL CARRERAS</p>
                     <h1 class="hero__title">
                         <span>VIVE LA PASIÓN DE</span>
-                        <span>LA FÓRMULA 1</span>
+                        <span class="hero__title-accent">LA FÓRMULA 1</span>
                     </h1>
                     <p class="hero__lead">Café de Especialidad, buena música y toda la emoción de las pistas.</p>
                     <div class="hero__actions">
-                        <a class="btn btn--primary" href="#reservas">RESERVA TU MESA</a>
-                        <a class="btn btn--ghost" href="#menu">VER MENÚ
+                        <a class="btn btn--primary btn--lg" href="#reservas">RESERVA TU MESA</a>
+                        <a class="btn btn--ghost btn--lg" href="#menu">VER MENÚ
                             <svg class="ico" viewBox="0 0 19.233 15" aria-hidden="true"><use href="#ico-arrow"></use></svg>
                         </a>
                     </div>
@@ -79,7 +79,7 @@
                 </div>
 
                 <div class="hero__media">
-                    <img src="src/imgs/hero-race.png" alt="Café y motorsport en Pit Stop Café Bar">
+                    <img src="src/imgs/editorial-02.png" alt="Café y motorsport en Pit Stop Café Bar">
                     <div class="hero__timer">
                         <span class="hero__timer-value">2:28.410</span>
                         <span class="hero__timer-label">FASTEST LAP — HOUSE RECORD</span>
@@ -134,7 +134,7 @@
                             <h3 class="menu-feature__title">CAFÉS</h3>
                             <p class="menu-feature__desc">Espresso de especialidad, métodos filtrados y bebidas calientes de temporada.</p>
                             <div class="menu-feature__row">
-                                <a class="btn btn--primary btn--pill" href="#menu">EXPLORE
+                                <a class="btn btn--primary btn--sm" href="#menu">EXPLORE
                                     <svg class="ico ico--sm" viewBox="0 0 19.233 15" aria-hidden="true"><use href="#ico-arrow"></use></svg>
                                 </a>
                                 <span class="muted">18 OPCIONES</span>
@@ -169,12 +169,12 @@
                     </div>
 
                     <article class="menu-combo">
-                        <img class="menu-combo__img" src="src/imgs/menu-combo.png" alt="Combo F1">
+                        <img class="menu-combo__img" src="src/imgs/menu-combos.png" alt="Combo F1">
                         <span class="chip chip--limited">LIMITED — RACE WEEK</span>
                         <span class="menu-num menu-num--sm">04</span>
                         <h3 class="menu-combo__title">COMBO <span>F1</span></h3>
                         <p class="menu-combo__desc">Combos inspirados en cada gran premio. Solo durante la carrera.</p>
-                        <a class="btn btn--outline btn--pill" href="#menu">VER COMBOS
+                        <a class="btn btn--outline btn--sm" href="#menu">VER COMBOS
                             <svg class="ico ico--sm" viewBox="0 0 19.233 15" aria-hidden="true"><use href="#ico-arrow"></use></svg>
                         </a>
                     </article>
@@ -188,7 +188,7 @@
 
                 <div class="events-grid">
                     <article class="event-main">
-                        <img class="event-main__img" src="src/imgs/event-main.png" alt="Race weekend en Pit Stop">
+                        <img class="event-main__img" src="src/imgs/singapur.png" alt="Race weekend en Pit Stop">
                         <div class="event-main__top">
                             <span class="chip chip--red">FEATURED — P1</span>
                             <span class="chip chip--ghost">LIVE VIEWING</span>
@@ -204,13 +204,13 @@
                         </div>
                         <div class="event-main__cta">
                             <span class="date-badge">OCT</span>
-                            <a class="btn btn--primary btn--pill" href="https://www.formula1.com/en/racing/2026" target="_blank" rel="noopener noreferrer">VIEW EVENT</a>
+                            <a class="btn btn--primary btn--sm" href="https://www.formula1.com/en/racing/2026" target="_blank" rel="noopener noreferrer">VIEW EVENT</a>
                         </div>
                     </article>
 
                     <div class="events-col">
                         <article class="event-card">
-                            <img class="event-card__img" src="src/imgs/event-01.png" alt="Clasificación y qualy night">
+                            <img class="event-card__img" src="src/imgs/event-03.png" alt="Clasificación y qualy night">
                             <div class="event-card__body">
                                 <span class="event-card__num">25</span>
                                 <h4 class="event-card__title">CLASIFICACIÓN + QUALY NIGHT</h4>
@@ -221,7 +221,7 @@
                             </div>
                         </article>
                         <article class="event-card">
-                            <img class="event-card__img" src="src/imgs/event-02.png" alt="Race replay and brunch">
+                            <img class="event-card__img" src="src/imgs/editorial-01.png" alt="Race replay and brunch">
                             <div class="event-card__body">
                                 <span class="event-card__num">26</span>
                                 <h4 class="event-card__title">RACE REPLAY &amp; BRUNCH</h4>
@@ -265,8 +265,8 @@
                         </div>
                     </div>
                     <div class="editorial__media">
-                        <img class="editorial__img editorial__img--a" src="src/imgs/editorial-01.png" alt="Detalle de café">
-                        <img class="editorial__img editorial__img--b" src="src/imgs/editorial-02.png" alt="Barista en acción">
+                        <img class="editorial__img editorial__img--a" src="src/imgs/event-02.png" alt="Detalle de café">
+                        <img class="editorial__img editorial__img--b" src="src/imgs/menu-coffe-02.png" alt="Barista en acción">
                         <figure class="pitwall">
                             <figcaption class="pitwall__label">PIT WALL NOTE</figcaption>
                             <blockquote class="pitwall__quote">“El Café, como la carrera se gana en los detalles”</blockquote>
@@ -280,7 +280,7 @@
             <section class="section section--location" id="ubicacion">
                 <div class="location">
                     <div class="location__media">
-                        <img class="location__map" src="src/imgs/location-map.png" alt="Mapa de ubicación">
+                        <img class="location__map" src="src/imgs/ubicacion.png" alt="Mapa de ubicación">
                         <span class="map-chip map-chip--coords">5.070275º N — 75.513811º W</span>
                         <span class="map-chip map-chip--here"><span class="dot dot--white"></span>P1 — Here we are.</span>
                         <span class="map-chip map-chip--dist">Av 12 de Octubre #65-30 <b>MANIZALES</b></span>
@@ -305,10 +305,10 @@
                             </div>
                         </dl>
                         <div class="location__actions">
-                            <a class="btn btn--outline" href="https://www.google.com/maps/dir/?api=1&amp;destination=5.070275,-75.513811" target="_blank" rel="noopener noreferrer">CÓMO LLEGAR
+                            <a class="btn btn--outline btn--md" href="https://www.google.com/maps/dir/?api=1&amp;destination=5.070275,-75.513811" target="_blank" rel="noopener noreferrer">CÓMO LLEGAR
                                 <svg class="ico ico--sm" viewBox="0 0 19.233 15" aria-hidden="true"><use href="#ico-arrow"></use></svg>
                             </a>
-                            <a class="btn btn--primary" href="#reservas">RESERVA TU MESA</a>
+                            <a class="btn btn--primary btn--md" href="#reservas">RESERVA TU MESA</a>
                         </div>
                     </div>
                 </div>
@@ -351,7 +351,7 @@
                     <div class="social-card social-card--wa">
                         <span class="social-card__title">WhatsApp Channel</span>
                         <span class="muted muted--sm">Alineación cada GP / Únete y sé parte de nuestra comunidad</span>
-                        <a class="btn btn--primary btn--pill" href="#reservas">JOIN</a>
+                        <a class="btn btn--primary btn--sm" href="#reservas">JOIN</a>
                     </div>
                 </div>
             </section>
@@ -377,8 +377,8 @@
                         <span class="footer__label">RESERVA TU MESA</span>
                         <p class="muted muted--sm">Reservas por teléfono o correo. Indica fecha, hora y personas.</p>
                         <div class="footer__cta-buttons">
-                            <a class="btn btn--primary footer__reserva" href="tel:+576874800000">LLAMAR</a>
-                            <a class="btn btn--outline footer__reserva" href="mailto:pitstopgestiones@gmail.com?subject=Reserva%20Pit%20Stop%20Caf%C3%A9%20Bar">RESERVAR</a>
+                            <a class="btn btn--primary btn--md footer__reserva" href="tel:+576874800000">LLAMAR</a>
+                            <a class="btn btn--outline btn--md footer__reserva" href="mailto:pitstopgestiones@gmail.com?subject=Reserva%20Pit%20Stop%20Caf%C3%A9%20Bar">RESERVAR</a>
                         </div>
                     </div>
                 </div>

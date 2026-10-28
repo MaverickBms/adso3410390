@@ -1,0 +1,1127 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="description"
+        content="PIT STOP CAFÉ BAR. Café de especialidad, buena música y toda la pasión de la Fórmula 1 en un solo lugar."
+    >
+    <meta name="theme-color" content="#090909">
+
+    <title>PIT STOP CAFÉ BAR | Vive la pasión de la Fórmula 1</title>
+
+    <!-- Hoja de estilos de la fase 2 -->
+    <link rel="stylesheet" href="src/css/style.css">
+
+    <!-- JavaScript de la fase 3 -->
+    <script src="src/js/script.js" defer></script>
+</head>
+
+<body>
+    <a class="skip-link" href="#contenido-principal">
+        Saltar al contenido principal
+    </a>
+
+    <!-- =========================================
+         ENCABEZADO Y NAVEGACIÓN
+    ========================================== -->
+    <header class="site-header" id="inicio">
+        <div class="header-container">
+
+            <a
+                class="brand-logo"
+                href="#inicio"
+                aria-label="PIT STOP CAFÉ BAR, ir al inicio"
+            >
+                <!-- Recurso provisional: reemplazar por el logo original -->
+                <img
+                    class="brand-logo__image"
+                    src="src/imgs/logo.png"
+                    alt="PIT STOP CAFÉ BAR"
+                    width="150"
+                    height="58"
+                >
+            </a>
+
+            <nav
+                class="main-navigation"
+                id="navegacion-principal"
+                aria-label="Navegación principal"
+            >
+                <ul class="main-navigation__list">
+                    <li>
+                        <a
+                            class="main-navigation__link"
+                            href="#inicio"
+                            aria-current="page"
+                        >
+                            Inicio
+                        </a>
+                    </li>
+                    <li>
+                        <a
+                            class="main-navigation__link"
+                            href="#menu"
+                        >
+                            Menú
+                        </a>
+                    </li>
+                    <li>
+                        <a
+                            class="main-navigation__link"
+                            href="#eventos"
+                        >
+                            Eventos
+                        </a>
+                    </li>
+                    <li>
+                        <a
+                            class="main-navigation__link"
+                            href="#ubicacion"
+                        >
+                            Ubicación
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+
+            <a
+                class="button button--primary header-reservation"
+                href="#ubicacion"
+            >
+                Reservas
+            </a>
+
+            <button
+                class="menu-toggle"
+                type="button"
+                aria-label="Abrir menú de navegación"
+                aria-expanded="false"
+                aria-controls="navegacion-principal"
+            >
+                <span class="menu-toggle__line"></span>
+                <span class="menu-toggle__line"></span>
+                <span class="menu-toggle__line"></span>
+            </button>
+
+        </div>
+    </header>
+
+    <main id="contenido-principal">
+
+        <!-- =========================================
+             HERO / PORTADA PRINCIPAL
+        ========================================== -->
+        <section class="hero section-dark" aria-labelledby="hero-title">
+
+            <div class="hero__content">
+
+                <p class="eyebrow hero__eyebrow">
+                    <span class="status-dot" aria-hidden="true"></span>
+                    PIT STOP / SECTOR 1 CONTROL CARRERA
+                </p>
+
+                <h1 class="hero__title" id="hero-title">
+                    Vive la pasión de
+                    <span class="text-accent">la Fórmula 1</span>
+                </h1>
+
+                <p class="hero__description">
+                    Café de especialidad, buena música y toda la emoción
+                    de las carreras en un solo lugar.
+                </p>
+
+                <div class="hero__actions">
+                    <a
+                        class="button button--primary"
+                        href="#ubicacion"
+                    >
+                        Reserva tu mesa
+                    </a>
+
+                    <a
+                        class="button button--outline"
+                        href="#menu"
+                    >
+                        Ver menú
+                        <span aria-hidden="true">↗</span>
+                    </a>
+                </div>
+
+                <div
+                    class="race-status"
+                    aria-label="Información de la próxima carrera"
+                >
+                    <div class="race-status__item">
+                        <span class="race-status__value">24</span>
+                        <span class="race-status__label">
+                            Próxima carrera
+                        </span>
+                    </div>
+
+                    <div class="race-status__item">
+                        <span class="race-status__value">04:00</span>
+                        <span class="race-status__label">
+                            Hora de salida
+                        </span>
+                    </div>
+
+                    <div class="race-status__item race-status__item--live">
+                        <span class="live-indicator">
+                            <span class="status-dot" aria-hidden="true"></span>
+                            LIVE
+                        </span>
+                        <span class="race-status__label">
+                            Race control
+                        </span>
+                    </div>
+                </div>
+
+                <p class="hero__microcopy">
+                    La emoción comienza antes de la bandera a cuadros.
+                </p>
+
+            </div>
+
+            <div class="hero__visual">
+
+                <img
+                    class="hero__image"
+                    src="src/imgs/hero-race.png"
+                    alt="Ambiente nocturno de un circuito de carreras con iluminación roja y reflejos sobre el asfalto"
+                    width="1200"
+                    height="900"
+                    fetchpriority="high"
+                >
+
+                <div class="hero__image-overlay" aria-hidden="true"></div>
+
+                <div class="hero__image-top">
+                    <span class="race-tag">F1 EXPERIENCE</span>
+                    <span class="race-tag race-tag--outline">
+                        TRACKSIDE
+                    </span>
+                </div>
+
+                <div class="hero__image-bottom">
+                    <span class="finish-label">
+                        FINISH
+                        <span>GRAND PRIX</span>
+                    </span>
+
+                    <div class="lap-counter">
+                        <span class="lap-counter__value">2:28.410</span>
+                        <span class="lap-counter__label">
+                            BEST LAP / SECTOR 1
+                        </span>
+                    </div>
+                </div>
+
+            </div>
+
+            <div
+                class="hero__progress"
+                role="presentation"
+                aria-hidden="true"
+            >
+                <span class="hero__progress-value"></span>
+            </div>
+
+        </section>
+
+        <!-- =========================================
+             PRESENTACIÓN DE LA MARCA
+        ========================================== -->
+        <section
+            class="brand-intro section-dark"
+            id="presentacion"
+            aria-labelledby="brand-intro-title"
+        >
+            <div class="brand-intro__inner">
+
+                <p class="eyebrow brand-intro__eyebrow">
+                    PIT STOP CAFÉ BAR / EXPERIENCIA
+                </p>
+
+                <h2 class="section-title brand-intro__title" id="brand-intro-title">
+                    Más que un café.
+                    <span class="outlined-text">
+                        Una experiencia de carrera.
+                    </span>
+                </h2>
+
+                <p class="brand-intro__description">
+                    Un lugar para los que viven la velocidad, el café
+                    de especialidad y la emoción de cada carrera.
+                    Una experiencia que reúne nuestra pasión por el
+                    automovilismo y el buen café.
+                </p>
+
+                <div class="race-separator" aria-label="Inicio de vuelta">
+                    <span class="race-separator__line"></span>
+                    <span class="race-separator__status">
+                        <span class="status-dot" aria-hidden="true"></span>
+                        START
+                    </span>
+                    <span class="race-separator__lap">
+                        LAP 01 / SECTOR 1
+                    </span>
+                    <span class="race-separator__line"></span>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- =========================================
+             NUESTRO MENÚ
+        ========================================== -->
+        <section
+            class="menu-section section-dark"
+            id="menu"
+            aria-labelledby="menu-title"
+        >
+            <div class="section-container">
+
+                <header class="section-header">
+                    <div class="section-header__main">
+                        <p class="eyebrow">
+                            <span class="status-dot" aria-hidden="true"></span>
+                            FUEL YOUR PASSION / FUEL YOUR RACE
+                        </p>
+
+                        <h2 class="section-title" id="menu-title">
+                            Nuestro menú
+                        </h2>
+                    </div>
+
+                    <p class="section-header__description">
+                        Café de especialidad, bebidas y comida
+                        para disfrutar cada momento de la carrera.
+                    </p>
+                </header>
+
+                <div class="menu-grid">
+
+                    <!-- Tarjeta principal: cafés -->
+                    <article class="menu-card menu-card--featured">
+
+                        <a
+                            class="menu-card__link"
+                            href="#ubicacion"
+                            aria-label="Descubre nuestra selección de cafés"
+                        >
+                            <img
+                                class="menu-card__image"
+                                src="src/imgs/menu-coffee.png"
+                                alt="Barista preparando café de especialidad en un ambiente inspirado en la Fórmula 1"
+                                width="800"
+                                height="1100"
+                                loading="lazy"
+                            >
+
+                            <span class="menu-card__number">01</span>
+
+                            <span class="menu-card__category">
+                                COFFEE LAB
+                            </span>
+
+                            <span class="menu-card__content">
+                                <span class="menu-card__title">
+                                    Cafés
+                                </span>
+
+                                <span class="menu-card__description">
+                                    Café de especialidad para
+                                    disfrutar cada vuelta.
+                                </span>
+
+                                <span class="button button--light">
+                                    Explore
+                                    <span aria-hidden="true">↗</span>
+                                </span>
+                            </span>
+                        </a>
+
+                    </article>
+
+                    <!-- Tarjeta de bebidas -->
+                    <article class="menu-card menu-card--beverages">
+
+                        <a
+                            class="menu-card__link"
+                            href="#ubicacion"
+                            aria-label="Descubre nuestras bebidas"
+                        >
+                            <img
+                                class="menu-card__image"
+                                src="src/imgs/menu-bebidas.png"
+                                alt="Selección de bebidas disponibles en PIT STOP CAFÉ BAR"
+                                width="700"
+                                height="500"
+                                loading="lazy"
+                            >
+
+                            <span class="menu-card__number">02</span>
+
+                            <span class="menu-card__content">
+                                <span class="menu-card__title">
+                                    Bebidas
+                                </span>
+
+                                <span class="menu-card__description">
+                                    Bebidas para acompañar
+                                    cada momento.
+                                </span>
+                            </span>
+                        </a>
+
+                    </article>
+
+                    <!-- Tarjeta de comida -->
+                    <article class="menu-card menu-card--food">
+
+                        <a
+                            class="menu-card__link"
+                            href="#ubicacion"
+                            aria-label="Descubre nuestra selección de comida"
+                        >
+                            <img
+                                class="menu-card__image"
+                                src="src/imgs/menu-comida.png"
+                                alt="Platos de comida servidos para compartir durante una carrera"
+                                width="700"
+                                height="500"
+                                loading="lazy"
+                            >
+
+                            <span class="menu-card__number">03</span>
+
+                            <span class="menu-card__category">
+                                PIT STOP FOOD
+                            </span>
+
+                            <span class="menu-card__content">
+                                <span class="menu-card__title">
+                                    Comida
+                                </span>
+
+                                <span class="menu-card__description">
+                                    Placeres y snacks para
+                                    compartir.
+                                </span>
+                            </span>
+                        </a>
+
+                    </article>
+
+                    <!-- Tarjeta de combos -->
+                    <article class="menu-card menu-card--combo">
+
+                        <div class="menu-card__combo-header">
+                            <span class="menu-card__number">04</span>
+                            <span class="menu-card__category">
+                                RACE WEEKEND
+                            </span>
+                        </div>
+
+                        <div class="menu-card__combo-content">
+                            <h3 class="menu-card__title">
+                                Combo F1
+                            </h3>
+
+                            <span class="menu-card__badge">
+                                Edición especial
+                            </span>
+
+                            <p class="menu-card__description">
+                                Combos inspirados en cada gran premio.
+                                Solo durante la carrera.
+                            </p>
+
+                            <a
+                                class="button button--primary"
+                                href="#ubicacion"
+                            >
+                                Ver combos
+                                <span aria-hidden="true">↗</span>
+                            </a>
+                        </div>
+
+                    </article>
+
+                </div>
+
+            </div>
+        </section>
+
+        <!-- =========================================
+             RACE WEEKEND / EVENTOS
+        ========================================== -->
+        <section
+            class="events-section section-dark"
+            id="eventos"
+            aria-labelledby="events-title"
+        >
+            <div class="section-container">
+
+                <header class="section-header">
+                    <div class="section-header__main">
+                        <p class="eyebrow">
+                            <span class="status-dot" aria-hidden="true"></span>
+                            ALL RACE WEEKENDS / LIVE EXPERIENCE
+                        </p>
+
+                        <h2 class="section-title" id="events-title">
+                            Race Weekend
+                        </h2>
+                    </div>
+
+                    <p class="section-header__description">
+                        Cada carrera es una nueva oportunidad
+                        para vivir la emoción en comunidad.
+                    </p>
+                </header>
+
+                <div class="events-grid">
+
+                    <!-- Evento destacado -->
+                    <article class="event-card event-card--featured">
+
+                        <a
+                            class="event-card__link"
+                            href="#ubicacion"
+                            aria-label="Consulta la experiencia del Gran Premio de Singapur"
+                        >
+                            <img
+                                class="event-card__image"
+                                src="src/imgs/event-main.png"
+                                alt="Circuito urbano iluminado durante una carrera nocturna de automovilismo"
+                                width="1200"
+                                height="750"
+                                loading="lazy"
+                            >
+
+                            <span class="event-card__tag event-card__tag--featured">
+                                FEATURED GP
+                            </span>
+
+                            <span class="event-card__tag event-card__tag--outline">
+                                LIVE TIMING
+                            </span>
+
+                            <span class="event-card__information">
+                                <span class="event-card__date">
+                                    <span class="event-card__day">24</span>
+                                    <span class="event-card__month">OCT</span>
+                                </span>
+
+                                <span class="event-card__details">
+                                    <span class="event-card__location">
+                                        GRAND PRIX
+                                    </span>
+
+                                    <span class="event-card__title">
+                                        Gran Premio de Singapur
+                                    </span>
+
+                                    <span class="event-card__description">
+                                        Vive la carrera con nosotros.
+                                    </span>
+                                </span>
+
+                                <span class="button button--primary">
+                                    View event
+                                    <span aria-hidden="true">↗</span>
+                                </span>
+                            </span>
+
+                        </a>
+
+                    </article>
+
+                    <!-- Evento secundario 1 -->
+                    <article class="event-card event-card--secondary">
+
+                        <a
+                            class="event-card__link"
+                            href="#ubicacion"
+                            aria-label="Consulta el evento del 25 de octubre"
+                        >
+                            <img
+                                class="event-card__image"
+                                src="src/imgs/event-01.png"
+                                alt="Automóviles de competición en un circuito"
+                                width="700"
+                                height="500"
+                                loading="lazy"
+                            >
+
+                            <span class="event-card__information">
+                                <span class="event-card__date">
+                                    <span class="event-card__day">25</span>
+                                    <span class="event-card__month">OCT</span>
+                                </span>
+
+                                <span class="event-card__details">
+                                    <span class="event-card__title">
+                                        Race Day
+                                    </span>
+
+                                    <span class="event-card__description">
+                                        Próxima sesión
+                                    </span>
+                                </span>
+                            </span>
+
+                        </a>
+
+                    </article>
+
+                    <!-- Evento secundario 2 -->
+                    <article class="event-card event-card--secondary">
+
+                        <a
+                            class="event-card__link"
+                            href="#ubicacion"
+                            aria-label="Consulta el evento del 26 de octubre"
+                        >
+                            <img
+                                class="event-card__image"
+                                src="src/imgs/event-02.png"
+                                alt="Interior de un café con ambiente acogedor"
+                                width="700"
+                                height="500"
+                                loading="lazy"
+                            >
+
+                            <span class="event-card__information">
+                                <span class="event-card__date">
+                                    <span class="event-card__day">26</span>
+                                    <span class="event-card__month">OCT</span>
+                                </span>
+
+                                <span class="event-card__details">
+                                    <span class="event-card__title">
+                                        Coffee Session
+                                    </span>
+
+                                    <span class="event-card__description">
+                                        Café y comunidad
+                                    </span>
+                                </span>
+                            </span>
+
+                        </a>
+
+                    </article>
+
+                </div>
+
+                <div class="events-footer">
+                    <p class="events-footer__note">
+                        Próximas carreras, encuentros y experiencias
+                        especiales en PIT STOP CAFÉ BAR.
+                    </p>
+
+                    <a
+                        class="text-link"
+                        href="#comunidad"
+                    >
+                        Sigue las novedades
+                        <span aria-hidden="true">↗</span>
+                    </a>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- =========================================
+             FILOSOFÍA: PRECISION / SPEED / PASSION / CRAFT
+        ========================================== -->
+        <section
+            class="experience-section section-dark"
+            id="experiencia"
+            aria-labelledby="experience-title"
+        >
+            <div class="section-container experience-grid">
+
+                <div class="experience__content">
+
+                    <p class="eyebrow">
+                        <span class="status-dot" aria-hidden="true"></span>
+                        THE PIT STOP EXPERIENCE
+                    </p>
+
+                    <h2 class="experience__title" id="experience-title">
+                        <span>Precision</span>
+                        <span class="outlined-text">Speed</span>
+                        <span class="text-accent">Passion</span>
+                        <span>Craft</span>
+                    </h2>
+
+                    <p class="experience__description">
+                        El café como un pit stop: energía, precisión
+                        y pasión en cada detalle. Cada taza celebra
+                        el arte del buen café.
+                    </p>
+
+                    <div class="coffee-specs">
+
+                        <div class="coffee-spec">
+                            <span class="coffee-spec__value">
+                                19g/36g
+                            </span>
+                            <span class="coffee-spec__label">
+                                Dosis / Ratio
+                            </span>
+                        </div>
+
+                        <div class="coffee-spec">
+                            <span class="coffee-spec__value">
+                                1.8 BAR
+                            </span>
+                            <span class="coffee-spec__label">
+                                Steam pressure
+                            </span>
+                        </div>
+
+                    </div>
+
+                    <div class="experience__brand-mark">
+                        <!-- Recurso provisional: distintivo gráfico de la marca -->
+                        <img
+                            src="src/imgs/arrow.svg"
+                            alt=""
+                            width="180"
+                            height="65"
+                            loading="lazy"
+                        >
+                    </div>
+
+                </div>
+
+                <div class="experience__visual">
+
+                    <figure class="experience__image experience__image--machine">
+                        <img
+                            src="src/imgs/editorial-01.png"
+                            alt="Detalle de una máquina y herramientas de preparación de café"
+                            width="750"
+                            height="950"
+                            loading="lazy"
+                        >
+                    </figure>
+
+                    <figure class="experience__image experience__image--barista">
+                        <img
+                            src="src/imgs/editorial-02.png"
+                            alt="Barista preparando café en PIT STOP CAFÉ BAR"
+                            width="750"
+                            height="950"
+                            loading="lazy"
+                        >
+                    </figure>
+
+                    <aside class="experience-quote">
+                        <p class="experience-quote__label">
+                            PIT WALL NOTE
+                        </p>
+
+                        <blockquote class="experience-quote__text">
+                            El café, como la carrera,
+                            se gana en los detalles.
+                        </blockquote>
+
+                        <p class="experience-quote__author">
+                            PIT STOP CAFÉ BAR
+                        </p>
+                    </aside>
+
+                </div>
+
+            </div>
+        </section>
+
+        <!-- =========================================
+             UBICACIÓN Y VISÍTANOS
+        ========================================== -->
+        <section
+            class="location-section section-dark"
+            id="ubicacion"
+            aria-labelledby="location-title"
+        >
+            <div class="section-container">
+
+                <div class="location-card">
+
+                    <div class="location-map">
+
+                        <!--
+                            Recurso provisional.
+                            Sustituir por un mapa real o una integración
+                            autorizada cuando se confirme la dirección.
+                        -->
+                        <a
+                            class="location-map__link"
+                            href="#location-details"
+                            aria-label="Consultar la ubicación de PIT STOP CAFÉ BAR"
+                        >
+                            <img
+                                class="location-map__image"
+                                src="src/imgs/location-map.png"
+                                alt="Mapa de referencia de la zona de ubicación del café"
+                                width="900"
+                                height="700"
+                                loading="lazy"
+                            >
+                        </a>
+
+                        <span class="location-map__label">
+                            PIT STOP / LOCATION
+                        </span>
+
+                        <span class="location-map__status">
+                            En ruta
+                        </span>
+
+                    </div>
+
+                    <div class="location-details" id="location-details">
+
+                        <p class="eyebrow">
+                            PIT STOP CAFÉ BAR
+                        </p>
+
+                        <h2 class="section-title" id="location-title">
+                            Visítanos
+                        </h2>
+
+                        <p class="location-details__intro">
+                            Tu próximo punto de encuentro.
+                        </p>
+
+                        <dl class="location-information">
+
+                            <div class="location-information__item">
+                                <dt>Dirección</dt>
+                                <dd>
+                                    Consulta nuestra ubicación y
+                                    cómo llegar al establecimiento.
+                                </dd>
+                            </div>
+
+                            <div class="location-information__item">
+                                <dt>Horario</dt>
+                                <dd>
+                                    Consulta nuestros horarios
+                                    de atención antes de visitarnos.
+                                </dd>
+                            </div>
+
+                            <div class="location-information__item">
+                                <dt>Teléfono</dt>
+                                <dd>
+                                    <a href="#ubicacion">
+                                        Contactar con el café
+                                    </a>
+                                </dd>
+                            </div>
+
+                        </dl>
+
+                        <div class="location-details__actions">
+                            <a
+                                class="button button--primary"
+                                href="#ubicacion"
+                            >
+                                Cómo llegar
+                                <span aria-hidden="true">↗</span>
+                            </a>
+
+                            <a
+                                class="button button--outline"
+                                href="#ubicacion"
+                            >
+                                Reserva tu mesa
+                            </a>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+        <!-- =========================================
+             REDES SOCIALES Y COMUNIDAD
+        ========================================== -->
+        <section
+            class="community-section section-dark"
+            id="comunidad"
+            aria-labelledby="community-title"
+        >
+            <div class="section-container">
+
+                <header class="section-header">
+                    <div class="section-header__main">
+                        <h2 class="section-title" id="community-title">
+                            Sigue la carrera
+                        </h2>
+                    </div>
+
+                    <p class="section-header__description">
+                        Más café. Más motores. Más experiencias.
+                        Únete a nuestra comunidad.
+                    </p>
+                </header>
+
+                <div class="community-grid">
+
+                    <!-- Instagram -->
+                    <article class="social-card social-card--instagram">
+
+                        <a
+                            class="social-card__link"
+                            href="#ubicacion"
+                            aria-label="Visita nuestro perfil de Instagram"
+                        >
+                            <img
+                                class="social-card__image"
+                                src="src/imgs/social-instagram.png"
+                                alt="Fotografía de la experiencia y el ambiente de PIT STOP CAFÉ BAR"
+                                width="800"
+                                height="600"
+                                loading="lazy"
+                            >
+
+                            <span class="social-card__platform">
+                                Instagram
+                            </span>
+
+                            <span class="social-card__handle">
+                                @pitstop.cafebar
+                            </span>
+
+                        </a>
+
+                    </article>
+
+                    <!-- TikTok -->
+                    <article class="social-card social-card--tiktok">
+
+                        <a
+                            class="social-card__link"
+                            href="#ubicacion"
+                            aria-label="Visita nuestro perfil de TikTok"
+                        >
+                            <span class="social-card__platform">
+                                TikTok
+                            </span>
+
+                            <span class="social-card__stat">
+                                120K
+                            </span>
+
+                            <span class="social-card__description">
+                                Momentos, carreras y café.
+                            </span>
+
+                            <span class="text-link">
+                                Síguenos
+                                <span aria-hidden="true">↗</span>
+                            </span>
+
+                        </a>
+
+                    </article>
+
+                    <!-- YouTube -->
+                    <article class="social-card social-card--youtube">
+
+                        <a
+                            class="social-card__link"
+                            href="#ubicacion"
+                            aria-label="Visita nuestro canal de YouTube"
+                        >
+                            <img
+                                class="social-card__image"
+                                src="src/imgs/social-youtube.png"
+                                alt="Imagen relacionada con el automovilismo y las carreras"
+                                width="800"
+                                height="600"
+                                loading="lazy"
+                            >
+
+                            <span class="social-card__platform">
+                                YouTube
+                            </span>
+
+                            <span class="social-card__description">
+                                Revive la emoción de cada carrera.
+                            </span>
+
+                        </a>
+
+                    </article>
+
+                    <!-- Facebook -->
+                    <article class="social-card social-card--facebook">
+
+                        <a
+                            class="social-card__link"
+                            href="#ubicacion"
+                            aria-label="Visita nuestra página de Facebook"
+                        >
+                            <span class="social-card__platform">
+                                Facebook
+                            </span>
+
+                            <span class="social-card__description">
+                                Eventos y comunidad.
+                            </span>
+
+                            <span class="social-card__arrow" aria-hidden="true">
+                                ↗
+                            </span>
+
+                        </a>
+
+                    </article>
+
+                    <!-- WhatsApp -->
+                    <article class="social-card social-card--whatsapp">
+
+                        <div class="social-card__content">
+                            <span class="social-card__platform">
+                                WhatsApp Channel
+                            </span>
+
+                            <p class="social-card__description">
+                                Mantente al día con novedades,
+                                eventos y próximas carreras.
+                            </p>
+
+                            <a
+                                class="button button--light"
+                                href="#ubicacion"
+                            >
+                                Join
+                            </a>
+                        </div>
+
+                    </article>
+
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- =========================================
+         PIE DE PÁGINA
+    ========================================== -->
+    <footer class="site-footer section-dark">
+
+        <div class="section-container">
+
+            <div class="footer-main">
+
+                <!-- Información de marca -->
+                <div class="footer-brand">
+
+                    <a
+                        class="footer-brand__logo"
+                        href="#inicio"
+                        aria-label="PIT STOP CAFÉ BAR, ir al inicio"
+                    >
+                        <img
+                            src="src/imgs/logo.png"
+                            alt="PIT STOP CAFÉ BAR"
+                            width="150"
+                            height="58"
+                            loading="lazy"
+                        >
+                    </a>
+
+                    <p class="footer-brand__category">
+                        CAFÉ BAR
+                    </p>
+
+                    <p class="footer-brand__description">
+                        Un lugar premium que vive dentro del
+                        universo del automovilismo.
+                    </p>
+
+                    <div class="footer-contact">
+                        <h2 class="footer-heading">
+                            Contacto
+                        </h2>
+
+                        <address class="footer-contact__details">
+                            <a href="#ubicacion">
+                                Escríbenos
+                            </a>
+                            <a href="#ubicacion">
+                                Cómo llegar
+                            </a>
+                        </address>
+                    </div>
+
+                </div>
+
+                <!-- Próxima carrera -->
+                <div class="footer-race">
+
+                    <h2 class="footer-heading">
+                        Race control
+                    </h2>
+
+                    <div class="footer-race__panel">
+                        <span class="footer-race__label">
+                            Next race
+                        </span>
+
+                        <span class="footer-race__value">
+                            Próxima carrera
+                        </span>
+                    </div>
+
+                    <a
+                        class="button button--primary footer-race__button"
+                        href="#ubicacion"
+                    >
+                        Reserva tu mesa
+                    </a>
+
+                </div>
+
+            </div>
+
+            <div class="footer-bottom">
+
+                <p class="footer-bottom__copyright">
+                    © <span class="footer-year">2026</span>
+                    PIT STOP CAFÉ BAR.
+                    Todos los derechos reservados.
+                </p>
+
+                <a
+                    class="footer-bottom__back-to-top"
+                    href="#inicio"
+                >
+                    Volver al inicio
+                    <span aria-hidden="true">↑</span>
+                </a>
+
+            </div>
+
+        </div>
+
+    </footer>
+
+</body>
+</html>

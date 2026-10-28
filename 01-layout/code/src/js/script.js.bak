@@ -1,0 +1,233 @@
+(function () {
+  'use strict';
+
+  document.addEventListener('DOMContentLoaded', function () {
+    var nav = document.querySelector('.main-navigation');
+    var navToggle = document.querySelector('.menu-toggle');
+    var navLinks = document.querySelectorAll('.main-navigation a[href^="#"]');
+    var menu = document.querySelector('.menu-grid');
+    var events = document.querySelector('.events-grid');
+    var editorial = document.querySelector('.experience-section');
+    var locationSection = document.querySelector('.location-section');
+    var socialGrid = document.querySelector('.community-grid');
+
+    /*
+     * 1. MENÚ DE NAVEGACIÓN MÓVIL
+     */
+
+    function setMenuState(isOpen) {
+      if (!nav || !navToggle) {
+        return;
+      }
+
+      nav.classList.toggle('is-open', isOpen);
+      navToggle.classList.toggle('is-active', isOpen);
+
+      navToggle.setAttribute('aria-expanded', String(isOpen));
+      navToggle.setAttribute(
+        'aria-label',
+        isOpen ? 'Cerrar menú de navegación' : 'Abrir menú de navegación'
+      );
+
+      document.body.classList.toggle('menu-open', isOpen);
+    }
+
+    function closeMenu() {
+      setMenuState(false);
+    }
+
+    if (nav && navToggle) {
+      navToggle.addEventListener('click', function () {
+        var isOpen = navToggle.getAttribute('aria-expanded') === 'true';
+        setMenuState(!isOpen);
+      });
+
+      navLinks.forEach(function (link) {
+        link.addEventListener('click', function () {
+          closeMenu();
+        });
+      });
+
+      document.addEventListener('keydown', function (event) {
+        if (event.key === 'Escape') {
+          closeMenu();
+        }
+      });
+
+      document.addEventListener('click', function (event) {
+        var isOpen = navToggle.getAttribute('aria-expanded') === 'true';
+
+        if (
+          isOpen &&
+          !nav.contains(event.target) &&
+          !navToggle.contains(event.target)
+        ) {
+          closeMenu();
+        }
+      });
+
+      window.addEventListener('resize', function () {
+        if (window.innerWidth > 768) {
+          closeMenu();
+        }
+      });
+    }
+
+    /*
+     * 2. NAVEGACIÓN ENTRE SECCIONES
+     */
+
+    var anchorLinks = document.querySelectorAll('a[href^="#"]');
+
+    anchorLinks.forEach(function (link) {
+      link.addEventListener('click', function (event) {
+        var targetId = link.getAttribute('href');
+
+        if (!targetId || targetId === '#') {
+          return;
+        }
+
+        var target = document.querySelector(targetId);
+
+        if (!target) {
+          return;
+        }
+
+        event.preventDefault();
+
+        target.scrollIntoView({
+          behavior: window.matchMedia(
+            '(prefers-reduced-motion: reduce)'
+          ).matches
+            ? 'auto'
+            : 'smooth',
+          block: 'start'
+        });
+
+        if (window.history && window.history.replaceState) {
+          window.history.replaceState(null, '', targetId);
+        }
+      });
+    });
+
+    /*
+     * 3. ANIMACIONES DE APARICIÓN
+     */
+
+    var revealElements = document.querySelectorAll(
+      '.reveal, .menu-grid, .events-grid, .experience-section, .location-section, .community-grid'
+    );
+
+    var reducedMotion = window.matchMedia(
+      '(prefers-reduced-motion: reduce)'
+    ).matches;
+
+    if ('IntersectionObserver' in window && !reducedMotion) {
+      var revealObserver = new IntersectionObserver(
+        function (entries, observer) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('is-visible');
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        {
+          threshold: 0.12,
+          rootMargin: '0px 0px -40px 0px'
+        }
+      );
+
+      revealElements.forEach(function (element) {
+        element.classList.add('reveal');
+
+        if (!element.classList.contains('is-visible')) {
+          revealObserver.observe(element);
+        }
+      });
+    } else {
+      revealElements.forEach(function (element) {
+        element.classList.add('is-visible');
+      });
+    }
+
+    /*
+     * 4. ESTADO VISUAL DE LOS ENLACES DE NAVEGACIÓN
+     */
+
+    var sections = document.querySelectorAll(
+      '#inicio, #menu, #eventos, #ubicacion'
+    );
+
+    if ('IntersectionObserver' in window && sections.length > 0) {
+      var sectionObserver = new IntersectionObserver(
+        function (entries) {
+          entries.forEach(function (entry) {
+            if (!entry.isIntersecting) {
+              return;
+            }
+
+            var sectionId = entry.target.id;
+
+            navLinks.forEach(function (link) {
+              var isCurrent =
+                link.getAttribute('href') === '#' + sectionId;
+
+              if (isCurrent) {
+                link.setAttribute('aria-current', 'page');
+              } else {
+                link.removeAttribute('aria-current');
+              }
+            });
+          });
+        },
+        {
+          rootMargin: '-25% 0px -60% 0px',
+          threshold: 0
+        }
+      );
+
+      sections.forEach(function (section) {
+        sectionObserver.observe(section);
+      });
+    }
+
+    /*
+     * 5. CIERRE DEL MENÚ CUANDO CAMBIA LA ORIENTACIÓN
+     */
+
+    window.addEventListener('orientationchange', function () {
+      closeMenu();
+    });
+
+    /*
+     * 6. ACCESIBILIDAD DE IMÁGENES Y ENLACES
+     */
+
+    var externalLinks = document.querySelectorAll(
+      'a[target="_blank"]'
+    );
+
+    externalLinks.forEach(function (link) {
+      var rel = link.getAttribute('rel') || '';
+      var relValues = rel.split(/\s+/).filter(Boolean);
+
+      if (relValues.indexOf('noopener') === -1) {
+        relValues.push('noopener');
+      }
+
+      link.setAttribute('rel', relValues.join(' '));
+    });
+
+    /*
+     * Referencias a las secciones principales.
+     * Se conservan para facilitar futuras ampliaciones.
+     */
+
+    void menu;
+    void events;
+    void editorial;
+    void locationSection;
+    void socialGrid;
+  });
+})();
