@@ -1,45 +1,173 @@
+
 /* =========================================================
    PIT STOP CAFÉ BAR — script.js
-   Interacciones: nav móvil, scroll reveal, sección activa,
-   contador de cuenta atrás y contadores numéricos.
    ========================================================= */
+
 (function () {
     'use strict';
 
-    /* ---------- Menú móvil ---------- */
-    var toggle = document.querySelector('.nav-toggle');
-    var nav = document.getElementById('primary-nav');
+    var doc = document;
+    var win = window;
 
-    if (toggle && nav) {
-        toggle.addEventListener('click', function () {
-            var open = nav.classList.toggle('is-open');
-            toggle.classList.toggle('is-active', open);
-            toggle.setAttribute('aria-expanded', String(open));
-            toggle.setAttribute('aria-label', open ? 'Cerrar menú' : 'Abrir menú');
-            document.body.classList.toggle('nav-open', open);
-        });
+    var reduceMotionQuery = win.matchMedia
+        ? win.matchMedia('(prefers-reduced-motion: reduce)')
+        : null;
 
-        nav.addEventListener('click', function (e) {
-            if (e.target.tagName === 'A') {
-                nav.classList.remove('is-open');
-                toggle.classList.remove('is-active');
-                toggle.setAttribute('aria-expanded', 'false');
-                document.body.classList.remove('nav-open');
-            }
-        });
+    var reduceMotion = Boolean(
+        reduceMotionQuery && reduceMotionQuery.matches
+    );
 
-        document.addEventListener('keydown', function (e) {
-            if (e.key === 'Escape' && nav.classList.contains('is-open')) {
-                nav.classList.remove('is-open');
-                toggle.classList.remove('is-active');
-                toggle.setAttribute('aria-expanded', 'false');
-                document.body.classList.remove('nav-open');
-            }
-        });
+
+    /* =====================================================
+       1. MENÚ MÓVIL
+       ===================================================== */
+
+    var toggle = doc.querySelector('.nav-toggle');
+    var nav = doc.getElementById('primary-nav');
+
+    var mobileQuery = win.matchMedia
+        ? win.matchMedia('(max-width: 700px)')
+        : null;
+
+    function isMobileMenuLayout() {
+        return mobileQuery
+            ? mobileQuery.matches
+            : win.innerWidth <= 700;
     }
 
-    /* ---------- Scroll reveal ---------- */
-    var revealTargets = [
+    function setMenuOpen(open, returnFocus) {
+        if (!toggle || !nav) return;
+
+        nav.classList.toggle('is-open', open);
+        toggle.classList.toggle('is-active', open);
+
+        toggle.setAttribute('aria-expanded', String(open));
+        toggle.setAttribute(
+            'aria-label',
+            open ? 'Cerrar menú' : 'Abrir menú'
+        );
+
+        doc.body.classList.toggle(
+            'nav-open',
+            open && isMobileMenuLayout()
+        );
+
+        if (returnFocus && open === false) {
+            toggle.focus();
+        }
+    }
+
+    if (toggle && nav) {
+
+        toggle.addEventListener('click', function () {
+            setMenuOpen(
+                toggle.getAttribute('aria-expanded') !== 'true'
+            );
+        });
+
+        nav.addEventListener('click', function (event) {
+            var link = event.target.closest('a');
+
+            if (link) {
+                setMenuOpen(false);
+            }
+        });
+
+        doc.addEventListener('keydown', function (event) {
+            if (
+                event.key === 'Escape' &&
+                toggle.getAttribute('aria-expanded') === 'true'
+            ) {
+                setMenuOpen(false, true);
+            }
+        });
+
+        function getMenuFocusableElements() {
+            var elements = [];
+            var links = nav.querySelectorAll('a[href]');
+            for (var i = 0; i < links.length; i += 1) {
+                elements.push(links[i]);
+            }
+            if (toggle) {
+                elements.push(toggle);
+            }
+            return elements;
+        }
+
+        function handleTabTrap(event) {
+            if (event.key !== 'Tab') {
+                return;
+            }
+            if (
+                toggle.getAttribute('aria-expanded') !== 'true'
+            ) {
+                return;
+            }
+            var elements = getMenuFocusableElements();
+            if (!elements.length) {
+                return;
+            }
+            var firstElement = elements[0];
+            var lastElement = elements[elements.length - 1];
+            var activeElement = doc.activeElement;
+            if (event.shiftKey) {
+                if (activeElement === firstElement) {
+                    event.preventDefault();
+                    lastElement.focus();
+                }
+            } else if (activeElement === lastElement) {
+                event.preventDefault();
+                firstElement.focus();
+            }
+        }
+
+        doc.addEventListener('keydown', handleTabTrap);
+
+        doc.addEventListener('click', function (event) {
+            if (
+                !isMobileMenuLayout() ||
+                toggle.getAttribute('aria-expanded') !== 'true'
+            ) {
+                return;
+            }
+
+            if (
+                !nav.contains(event.target) &&
+                !toggle.contains(event.target)
+            ) {
+                setMenuOpen(false);
+            }
+        });
+
+        function handleMenuViewportChange() {
+            if (!isMobileMenuLayout()) {
+                setMenuOpen(false);
+            }
+        }
+
+        if (
+            mobileQuery &&
+            mobileQuery.addEventListener
+        ) {
+            mobileQuery.addEventListener(
+                'change',
+                handleMenuViewportChange
+            );
+        } else {
+            win.addEventListener(
+                'resize',
+                handleMenuViewportChange,
+                { passive: true }
+            );
+        }
+    }
+
+
+    /* =====================================================
+       2. ANIMACIONES AL DESPLAZARSE (SCROLL REVEAL)
+       ===================================================== */
+
+    var revealSelectors = [
         '.hero__panel > *',
         '.section__head',
         '.menu-feature',
@@ -56,160 +184,456 @@
         '.footer__top'
     ];
 
-    var revealEls = document.querySelectorAll(revealTargets.join(','));
-    revealEls.forEach(function (el) { el.classList.add('reveal'); });
+    var revealElements = doc.querySelectorAll(
+        revealSelectors.join(',')
+    );
 
-    if ('IntersectionObserver' in window) {
-        var revealObserver = new IntersectionObserver(function (entries) {
-            entries.forEach(function (entry) {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('is-visible');
-                    revealObserver.unobserve(entry.target);
-                }
-            });
-        }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
+    if (reduceMotion) {
 
-        revealEls.forEach(function (el, i) {
-            el.style.transitionDelay = (Math.min(i % 6, 5) * 60) + 'ms';
-            revealObserver.observe(el);
+        revealElements.forEach(function (element) {
+            element.classList.add('is-visible');
         });
-    } else {
-        revealEls.forEach(function (el) { el.classList.add('is-visible'); });
-    }
 
-    /* ---------- Sección activa en la nav ----------
-       El <header> es sticky: su rect queda siempre pegado arriba y nunca entra
-       en la banda de un IntersectionObserver, por eso #inicio no se activaba.
-       Se resuelve con un scroll-spy: la línea de decisión es el punto donde
-       aterriza una sección al navegar por anclas y la sección activa es la
-       última que la ha rebasado. Para INICIO la referencia es el Hero
-       (la sección real de inicio). */
-    var navLinks = Array.prototype.slice.call(document.querySelectorAll('.nav a[href^="#"]'));
+    } else if ('IntersectionObserver' in win) {
 
-    function spyTarget(link) {
-        var id = link.getAttribute('href').slice(1);
-        if (!id) { return null; }
-        if (id === 'inicio') {
-            return document.querySelector('.hero') || document.getElementById(id);
-        }
-        return document.getElementById(id);
-    }
+        var revealObserver = new IntersectionObserver(
+            function (entries, observer) {
 
-    var spyTargets = navLinks.map(spyTarget).filter(Boolean);
+                entries.forEach(function (entry) {
 
-    function setActive(target) {
-        navLinks.forEach(function (a) {
-            var isActive = spyTarget(a) === target;
-            a.classList.toggle('is-active', isActive);
-            if (isActive) {
-                a.setAttribute('aria-current', 'true');
-            } else {
-                a.removeAttribute('aria-current');
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        observer.unobserve(entry.target);
+                    }
+
+                });
+
+            },
+            {
+                root: null,
+                rootMargin: '0px 0px -8% 0px',
+                threshold: 0.08
             }
+        );
+
+        revealElements.forEach(function (element, index) {
+
+            element.classList.add('reveal');
+
+            element.style.transitionDelay =
+                (Math.min(index % 6, 5) * 60) + 'ms';
+
+            revealObserver.observe(element);
+
         });
+
+    } else {
+
+        revealElements.forEach(function (element) {
+            element.classList.add('is-visible');
+        });
+
     }
 
-    function updateActive() {
-        if (!spyTargets.length) { return; }
-        /* La línea de decisión coincide con el punto donde aterriza una sección
-           al navegar por anclas (scroll-padding-top), de modo que la sección
-           visible es siempre la activa. */
-        var pad = parseFloat(getComputedStyle(document.documentElement).scrollPaddingTop) || 0;
-        var line = window.pageYOffset + pad + 1;
-        var current = spyTargets[0];
 
-        for (var i = 0; i < spyTargets.length; i++) {
-            var top = spyTargets[i].getBoundingClientRect().top + window.pageYOffset;
-            if (top <= line) {
-                current = spyTargets[i];
+    /* =====================================================
+       3. NAVEGACIÓN ACTIVA (SCROLL SPY)
+       ===================================================== */
+
+    var navLinks = Array.prototype.slice.call(
+        doc.querySelectorAll('.nav a[href^="#"]')
+    );
+
+    function getSpyTarget(link) {
+
+        var href = link.getAttribute('href');
+
+        if (!href || href.length < 2) return null;
+
+        var targetId = href.slice(1);
+
+        if (targetId === 'inicio') {
+            return (
+                doc.querySelector('.hero') ||
+                doc.getElementById(targetId)
+            );
+        }
+
+        return doc.getElementById(targetId);
+    }
+
+    var spyItems = navLinks.map(function (link) {
+        return {
+            link: link,
+            target: getSpyTarget(link)
+        };
+    }).filter(function (item) {
+        return Boolean(item.target);
+    });
+
+    function updateActiveNavigation() {
+
+        if (!spyItems.length) return;
+
+        var scrollPadding =
+            parseFloat(
+                win.getComputedStyle(
+                    doc.documentElement
+                ).scrollPaddingTop
+            ) || 0;
+
+        var decisionLine =
+            win.pageYOffset + scrollPadding + 1;
+
+        var currentTarget = spyItems[0].target;
+
+        for (var i = 0; i < spyItems.length; i += 1) {
+
+            var targetTop =
+                spyItems[i].target.getBoundingClientRect().top +
+                win.pageYOffset;
+
+            if (targetTop <= decisionLine) {
+                currentTarget = spyItems[i].target;
             } else {
                 break;
             }
         }
-        setActive(current);
+
+        spyItems.forEach(function (item) {
+
+            var active =
+                item.target === currentTarget;
+
+            item.link.classList.toggle(
+                'is-active',
+                active
+            );
+
+            if (active) {
+                item.link.setAttribute(
+                    'aria-current',
+                    'page'
+                );
+            } else {
+                item.link.removeAttribute('aria-current');
+            }
+
+        });
     }
 
-    var scrollPending = false;
-    window.addEventListener('scroll', function () {
-        if (scrollPending) { return; }
-        scrollPending = true;
-        window.requestAnimationFrame(function () {
-            scrollPending = false;
-            updateActive();
+    var scrollUpdatePending = false;
+
+    win.addEventListener('scroll', function () {
+
+        if (scrollUpdatePending) return;
+
+        scrollUpdatePending = true;
+
+        win.requestAnimationFrame(function () {
+
+            scrollUpdatePending = false;
+            updateActiveNavigation();
+
         });
+
     }, { passive: true });
 
-    window.addEventListener('resize', updateActive);
-    window.addEventListener('load', updateActive);
-    updateActive();
+    win.addEventListener(
+        'resize',
+        updateActiveNavigation,
+        { passive: true }
+    );
 
-    /* ---------- Contador / cuenta atrás del hero ---------- */
-    var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    var countdown = document.querySelector('[data-countdown]');
+    win.addEventListener(
+        'load',
+        updateActiveNavigation
+    );
+
+    updateActiveNavigation();
+
+
+    /* =====================================================
+       4. CUENTA ATRÁS DEL HERO
+       ===================================================== */
+
+    var countdown = doc.querySelector('[data-countdown]');
+    var countdownTimer = null;
+
     if (countdown) {
-        var initialCountdown = parseInt(countdown.getAttribute('data-countdown'), 10) || 240;
-        var remaining = initialCountdown;
 
-        var renderCountdown = function () {
-            var m = Math.floor(remaining / 60);
-            var s = remaining % 60;
-            countdown.textContent = ('0' + m).slice(-2) + ':' + ('0' + s).slice(-2);
-        };
+        var initialCountdown = parseInt(
+            countdown.getAttribute('data-countdown'),
+            10
+        );
+
+        if (
+            !Number.isFinite(initialCountdown) ||
+            initialCountdown < 0
+        ) {
+            initialCountdown = 240;
+        }
+
+        var remainingSeconds = initialCountdown;
+
+        function renderCountdown() {
+
+            var minutes = Math.floor(
+                remainingSeconds / 60
+            );
+
+            var seconds = remainingSeconds % 60;
+
+            countdown.textContent =
+                ('0' + minutes).slice(-2) +
+                ':' +
+                ('0' + seconds).slice(-2);
+        }
+
         renderCountdown();
 
         if (!reduceMotion) {
-            var countdownTimer = setInterval(function () {
-                remaining = remaining > 0 ? remaining - 1 : initialCountdown;
+
+            countdownTimer = win.setInterval(function () {
+
+                remainingSeconds =
+                    remainingSeconds > 0
+                        ? remainingSeconds - 1
+                        : initialCountdown;
+
                 renderCountdown();
+
             }, 1000);
 
-            window.addEventListener('pagehide', function () { clearInterval(countdownTimer); });
         }
     }
 
-    /* ---------- Animación del cronómetro de vuelta ---------- */
-    var timer = document.querySelector('.hero__timer-value');
-    if (timer && !reduceMotion) {
-        var targetLap = 150.250; // 2:30.250
-        var startLap = 148.410; // 2:28.410
-        var lapValue = startLap;
-        var timerStart = window.performance ? performance.now() : Date.now();
-        var timerDuration = 2200;
 
-        function formatLap(value) {
-            var totalSeconds = Math.max(0, value);
-            var minutes = Math.floor(totalSeconds / 60);
-            var seconds = Math.floor(totalSeconds % 60);
-            var ms = Math.round((totalSeconds - Math.floor(totalSeconds)) * 1000);
-            return minutes + ':' + ('0' + seconds).slice(-2) + '.' + ('00' + ms).slice(-3);
+    /* =====================================================
+       5. CRONÓMETRO ANIMADO DEL HERO
+       ===================================================== */
+
+    var lapTimerElement = doc.querySelector(
+        '.hero__timer-value'
+    );
+
+    var lapTimeLiveRegion = doc.getElementById(
+        'lap-time-live'
+    );
+
+    var lapInterval = null;
+    var lapFinishTimeout = null;
+
+    if (lapTimerElement && !reduceMotion) {
+
+        var startLapSeconds = 148.410;
+        var targetLapSeconds = 150.250;
+        var animationDuration = 2200;
+
+        var animationStart =
+            win.performance
+                ? win.performance.now()
+                : Date.now();
+
+        function formatLapTime(value) {
+
+            var safeValue = Math.max(0, value);
+
+            var minutes = Math.floor(safeValue / 60);
+            var wholeSeconds = Math.floor(safeValue % 60);
+
+            var milliseconds = Math.round(
+                (
+                    safeValue -
+                    Math.floor(safeValue)
+                ) * 1000
+            );
+
+            return (
+                minutes +
+                ':' +
+                ('0' + wholeSeconds).slice(-2) +
+                '.' +
+                ('00' + milliseconds).slice(-3)
+            );
         }
 
-        function renderLap(value) {
-            timer.textContent = formatLap(value);
+        function renderLapTime(value) {
+            lapTimerElement.textContent =
+                formatLapTime(value);
+
+            if (lapTimeLiveRegion) {
+                lapTimeLiveRegion.textContent =
+                    formatLapTime(value);
+            }
         }
 
-        renderLap(lapValue);
+        renderLapTime(startLapSeconds);
 
-        var lapTick = setInterval(function () {
-            var now = window.performance ? performance.now() : Date.now();
-            var progress = Math.min((now - timerStart) / timerDuration, 1);
-            var eased = 1 - Math.pow(1 - progress, 3);
-            lapValue = startLap + (targetLap - startLap) * eased;
-            renderLap(lapValue);
+        lapInterval = win.setInterval(function () {
+
+            var now =
+                win.performance
+                    ? win.performance.now()
+                    : Date.now();
+
+            var progress = Math.min(
+                (now - animationStart) / animationDuration,
+                1
+            );
+
+            var easedProgress =
+                1 - Math.pow(1 - progress, 3);
+
+            var currentLap =
+                startLapSeconds +
+                (
+                    targetLapSeconds -
+                    startLapSeconds
+                ) * easedProgress;
+
+            renderLapTime(currentLap);
 
             if (progress >= 1) {
-                clearInterval(lapTick);
-                lapValue = targetLap;
-                renderLap(lapValue);
-                timer.classList.add('is-finished');
-                timer.closest('.hero__timer').classList.add('hero__timer--finished');
-                setTimeout(function () {
-                    timer.classList.remove('is-finished');
-                    timer.closest('.hero__timer').classList.remove('hero__timer--finished');
+
+                win.clearInterval(lapInterval);
+                lapInterval = null;
+
+                renderLapTime(targetLapSeconds);
+
+                lapTimerElement.classList.add('is-finished');
+
+                var timerCard =
+                    lapTimerElement.closest('.hero__timer');
+
+                if (timerCard) {
+                    timerCard.classList.add(
+                        'hero__timer--finished'
+                    );
+                }
+
+                lapFinishTimeout = win.setTimeout(function () {
+
+                    lapTimerElement.classList.remove(
+                        'is-finished'
+                    );
+
+                    if (timerCard) {
+                        timerCard.classList.remove(
+                            'hero__timer--finished'
+                        );
+                    }
+
+                    lapFinishTimeout = null;
+
                 }, 2200);
             }
-        }, 30);
 
-        window.addEventListener('pagehide', function () { clearInterval(lapTick); });
+        }, 30);
     }
-})();
+
+
+    /* =====================================================
+       6. LIMPIEZA DE INTERVALOS
+       ===================================================== */
+
+    win.addEventListener('pagehide', function () {
+
+        if (countdownTimer !== null) {
+            win.clearInterval(countdownTimer);
+        }
+
+        if (lapInterval !== null) {
+            win.clearInterval(lapInterval);
+        }
+
+        if (lapFinishTimeout !== null) {
+            win.clearTimeout(lapFinishTimeout);
+        }
+
+    });
+
+
+    /* =====================================================
+       7. BARRA DE RECORRIDO / RACE PROGRESS
+       ===================================================== */
+
+    var raceProgress = doc.getElementById('race-progress');
+
+    var raceProgressFill = doc.getElementById(
+        'race-progress-fill'
+    );
+
+    var progressFramePending = false;
+
+    function updateRaceProgress() {
+
+        if (!raceProgress || !raceProgressFill) return;
+
+        var scrollable =
+            doc.documentElement.scrollHeight - win.innerHeight;
+
+        var ratio = scrollable > 0
+            ? Math.min(
+                1,
+                Math.max(0, win.scrollY / scrollable)
+            )
+            : 0;
+
+        var percent = Math.round(ratio * 100);
+
+        raceProgressFill.style.width = percent + '%';
+
+        raceProgress.setAttribute(
+            'aria-valuenow',
+            String(percent)
+        );
+
+        raceProgress.setAttribute(
+            'aria-valuetext',
+            percent + '% del recorrido'
+        );
+    }
+
+    function scheduleRaceProgress() {
+
+        if (progressFramePending) return;
+
+        progressFramePending = true;
+
+        win.requestAnimationFrame(function () {
+
+            progressFramePending = false;
+            updateRaceProgress();
+
+        });
+    }
+
+    if (raceProgress && raceProgressFill) {
+
+        win.addEventListener(
+            'scroll',
+            scheduleRaceProgress,
+            { passive: true }
+        );
+
+        win.addEventListener(
+            'resize',
+            scheduleRaceProgress,
+            { passive: true }
+        );
+
+        win.addEventListener(
+            'load',
+            updateRaceProgress
+        );
+
+        updateRaceProgress();
+    }
+
+
+    /* =====================================================
+       FIN DEL SCRIPT — PIT STOP CAFÉ BAR
+       ===================================================== */
+
+}());

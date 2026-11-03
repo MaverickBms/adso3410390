@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="src/css/style.css">
 </head>
 <body>
-    <a class="skip-link" href="#menu">Saltar al contenido principal</a>
+    <a class="skip-link" href="#contenido">Saltar al contenido principal</a>
     <span id="inicio" class="anchor-top" aria-hidden="true"></span>
     <div class="page">
 
@@ -22,7 +22,7 @@
             </a>
 
             <nav class="nav" id="primary-nav" aria-label="Principal">
-                <a href="#inicio" aria-current="true">INICIO</a>
+                <a href="#inicio" aria-current="page">INICIO</a>
                 <a href="#menu">MENÚ</a>
                 <a href="#eventos">EVENTOS</a>
                 <a href="#ubicacion">UBICACIÓN</a>
@@ -37,7 +37,18 @@
             </div>
         </header>
 
-        <main>
+<!-- Indicador de recorrido: permanece bajo la navegación y avanza con el scroll -->
+<div class="race-progress" id="race-progress" role="progressbar" aria-label="Progreso de recorrido por la página" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+  <span class="race-progress__dash" aria-hidden="true">---</span>
+  <span class="race-progress__start"><i aria-hidden="true"></i> START</span>
+  <span class="race-progress__label">LAP 01 / SECTOR 1</span>
+  <span class="race-progress__track" aria-hidden="true"><span class="race-progress__fill" id="race-progress-fill"></span></span>
+  <span class="race-progress__dash" aria-hidden="true">---</span>
+  <strong class="race-progress__finish">FINISH</strong>
+  <span class="race-progress__distance">STRAIGHT — 200 M</span>
+</div>
+
+        <main id="contenido" tabindex="-1">
 
             <!-- ================= HERO ================= -->
             <section class="hero">
@@ -61,7 +72,7 @@
                             <span class="stat__label">RACES/SEASON</span>
                         </div>
                         <div class="stat">
-                            <span class="stat__value stat__value--count" data-countdown="240">04:00</span>
+                            <span class="stat__value stat__value--count" data-countdown="240" aria-live="polite">04:00</span>
                             <span class="stat__label">NEXT EVENT</span>
                         </div>
                         <div class="stat stat--status">
@@ -70,6 +81,7 @@
                         </div>
                     </div>
 
+                    <span class="sr-only" id="lap-time-live" aria-live="polite"></span>
                     <div class="hero__foot">
                         <span class="hero__scroll">SCROLL TO EXPLORE
                             <svg class="ico ico--down" viewBox="0 0 6.73 9" aria-hidden="true"><path d="M3.365 0v7.5m0 0 2.6-2.6m-2.6 2.6L.76 4.9" fill="none" stroke="currentColor" stroke-width="1"/></svg>
@@ -101,13 +113,14 @@
                 </h2>
                 <p class="lead">Un pit lane para tus sentidos: café de especialidad calibrado al milisegundo, barra de autor y la comunidad más rápida de la ciudad.</p>
 
-                <div class="laptrack">
-                    <span class="laptrack__dash">---</span>
-                    <span class="chip chip--live"><span class="dot dot--red"></span>START</span>
-                    <span class="laptrack__meta">LAP 01 / SECTOR 1</span>
-                    <span class="laptrack__bar"></span>
-                    <span class="laptrack__dash">---</span>
-                    <span class="laptrack__meta laptrack__meta--end"><strong>FINISH</strong><small>STRAIGHT — 200 M</small></span>
+                <!-- Frases reales de corredores de F1 — ticker dinámico -->
+                <div class="driver-quotes" aria-label="Frases de corredores de F1">
+                    <div class="driver-quotes__track">
+                        <p class="driver-quote">“Si no buscamos el hueco, no somos corredores.” — Ayrton Senna</p>
+                        <p class="driver-quote">“Ser segundo es ser el primero de los que pierden.” — Ayrton Senna</p>
+                        <p class="driver-quote">“Si no buscamos el hueco, no somos corredores.” — Ayrton Senna</p>
+                        <p class="driver-quote">“Ser segundo es ser el primero de los que pierden.” — Ayrton Senna</p>
+                    </div>
                 </div>
             </section>
 
