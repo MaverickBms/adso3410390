@@ -1028,6 +1028,85 @@ body.mainmenu.layout main menu a span {
 
 
 /* =========================================================
+   VIDEO DE FONDO — PORTADA MENÚ (YouTube)
+   ========================================================= */
+
+.video-bg {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.video-bg__media {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    /* Mejora ligera de percepción visual y aceleración de GPU */
+    filter: contrast(1.06) saturate(1.08);
+    will-change: transform;
+    transform: translateZ(0);
+}
+
+/* Ajustes del menú para legibilidad sobre el video de fondo */
+
+body.mainmenu main nav ul a:is(:link, :visited) {
+    background:
+        linear-gradient(
+            135deg,
+            rgba(10, 10, 12, 0.65),
+            rgba(10, 10, 12, 0.48)
+        );
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border: 1px solid rgba(255, 255, 255, 0.30);
+    box-shadow:
+        0 6px 20px rgba(0, 0, 0, 0.35),
+        inset 0 1px 0 rgba(255, 255, 255, 0.12);
+}
+
+body.mainmenu main nav ul a:is(:link, :visited):hover {
+    background:
+        linear-gradient(
+            135deg,
+            rgba(237, 33, 0, 0.88),
+            rgba(120, 0, 20, 0.80)
+        );
+    border-color: rgba(255, 255, 255, 0.40);
+    box-shadow:
+        0 10px 28px rgba(0, 0, 0, 0.45),
+        inset 0 1px 0 rgba(255, 255, 255, 0.18);
+}
+
+body.mainmenu main nav ul a aside h3,
+body.mainmenu main nav ul a aside small {
+    text-shadow: 0 2px 6px rgba(0, 0, 0, 0.55);
+}
+
+body.mainmenu main nav ul a::after {
+    color: rgba(255, 255, 255, 0.75);
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
+}
+
+body.mainmenu main nav ul a:hover::after {
+    color: #fff;
+    text-shadow: 0 1px 6px rgba(0, 0, 0, 0.6);
+}
+
+/* Reducido de movimiento: sin video de fondo, se mantiene el degradado estático */
+@media (prefers-reduced-motion: reduce) {
+    .video-bg {
+        display: none;
+    }
+}
+
+/* =========================================================
    REDUCED MOTION
    ========================================================= */
 
