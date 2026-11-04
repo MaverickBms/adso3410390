@@ -58,7 +58,7 @@
     --btn-sm-min: 46px;
 
     /* Hero: reparto de columnas y altura mínima (nunca fija: el contenido manda). */
-    --hero-cols: minmax(0, 3fr) minmax(0, 2fr);
+    --hero-cols: minmax(0, 45%) minmax(0, 55%);
     --hero-min-h: clamp(560px, calc(100vh - var(--header-h)), 900px);
 
     --ease: cubic-bezier(.22, 1, .36, 1);
@@ -520,8 +520,14 @@ ul, dl { list-style: none; }
 
 .hero__lead { color: var(--gray); font-size: var(--fs-lead); line-height: 1.45; max-width: 26ch; margin-top: 2px; }
 
-.hero__actions { display: flex; gap: 16px; flex-wrap: wrap; margin-top: 12px; }
+.hero__actions { display: flex; gap: 16px; flex-wrap: nowrap; margin-top: 12px; align-items: center; }
 .hero__actions .btn:focus-visible { outline: 2px solid #fff; outline-offset: 3px; }
+
+/* En móviles pequeños, permitir que los botones se ajusten si no caben */
+@media (max-width: 390px) {
+    .hero__actions { flex-wrap: wrap; justify-content: center; }
+    .hero__actions .btn { flex: 1 1 45%; }
+}
 
 .hero__stats {
     display: flex;
@@ -739,7 +745,7 @@ ul, dl { list-style: none; }
 .menu-col { display: grid; grid-template-rows: 1fr 1fr; gap: clamp(16px, 1.6vw, 24px); }
 .menu-item {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) clamp(110px, 12vw, 168px);
+    grid-template-columns: minmax(0, 1fr) minmax(140px, 42%);
     gap: 14px;
     align-items: stretch;
     padding: 26px;
@@ -751,7 +757,9 @@ ul, dl { list-style: none; }
 .menu-item:hover { border-color: var(--line); transform: translateY(-3px); }
 .menu-item__text { display: flex; flex-direction: column; gap: 8px; min-width: 0; }
 .menu-item__title { font-family: var(--title); font-size: clamp(26px, 2.6vw, 38px); line-height: 1.05; font-weight: 700; }
-.menu-item__img { width: 100%; aspect-ratio: 1 / 1; height: 100%; min-height: 110px; border-radius: 12px; object-fit: cover; object-position: 50% 45%; }
+.menu-item__img { width: 100%; aspect-ratio: 1 / 1; height: 100%; min-height: 140px; border-radius: 12px; object-fit: cover; object-position: 50% 45%; }
+.menu-item .muted { font-size: clamp(12px, 1.1vw, 14px); line-height: 1.4; }
+.menu-item .link-arrow { font-size: clamp(11px, 1vw, 13px); }
 
 .menu-combo {
     position: relative;
@@ -796,11 +804,30 @@ ul, dl { list-style: none; }
 .event-main__top { display: flex; gap: 10px; }
 .event-main__gp-num { font-family: var(--title); font-size: clamp(56px, 7vw, 100px); line-height: .82; margin-top: 4px; font-weight: 600; }
 .event-main__info { margin-top: auto; display: flex; flex-direction: column; gap: 8px; }
-.event-main__title { font-family: var(--title); font-size: clamp(24px, 2.4vw, 34px); line-height: 1.02; font-weight: 600; }
-.event-main__meta { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 6px; }
-.event-pill { display: inline-flex; align-items: center; gap: 8px; font-size: var(--fs-small); letter-spacing: .06em; text-transform: uppercase; color: var(--gray); }
+.event-main__title { font-family: var(--title); font-size: clamp(26px, 2.6vw, 36px); line-height: 1.05; font-weight: 700; letter-spacing: .01em; }
+.event-main__meta { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 8px; }
+.event-pill { display: inline-flex; align-items: center; gap: 8px; font-size: var(--fs-small); letter-spacing: .08em; text-transform: uppercase; color: var(--gray); background: rgba(255,255,255,0.05); padding: 6px 12px; border-radius: 20px; border: 1px solid var(--line-soft); }
 .event-pill strong { color: var(--white); }
-.event-main__cta { position: absolute; right: 24px; bottom: 24px; display: flex; align-items: center; gap: 12px; }
+.event-main__cta { position: absolute; right: 24px; bottom: 24px; display: flex; align-items: center; gap: 12px; z-index: 3; }
+
+/* Overlay clickeable sobre el evento principal para acceso al link VIEW EVENT */
+.event-main::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    background: rgba(0,0,0,0);
+    transition: background 0.3s ease;
+}
+.event-main:hover::before {
+    background: rgba(225, 6, 0, 0.15);
+}
+.event-main:hover .btn--primary {
+    background: #fff;
+    color: var(--bg);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+}
 
 .date-badge {
     display: inline-flex;
@@ -833,9 +860,26 @@ ul, dl { list-style: none; }
 .event-card__img { width: 100%; height: 100%; max-height: 260px; border-radius: 12px; object-fit: cover; object-position: 50% 40%; }
 .event-card__body { display: flex; flex-direction: column; gap: 6px; padding: 8px 6px; }
 .event-card__num { font-family: var(--title); font-size: clamp(26px, 2.6vw, 38px); line-height: .88; color: var(--gray); }
-.event-card__title { font-family: var(--title); font-size: var(--fs-card); line-height: 1.08; font-weight: 600; }
+.event-card__title { font-family: var(--title); font-size: clamp(20px, 2vw, 24px); line-height: 1.1; font-weight: 700; letter-spacing: .01em; }
 .event-card__meta { font-size: var(--fs-label); letter-spacing: .1em; text-transform: uppercase; color: var(--gray); }
-.event-card .link-arrow { margin-top: auto; }
+.event-card .link-arrow { margin-top: auto; font-size: clamp(11px, 1vw, 13px); }
+
+/* Overlay clickeable sobre el event-card para acceso al link VIEW EVENT */
+.event-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    background: rgba(0,0,0,0);
+    transition: background 0.3s ease;
+}
+.event-card:hover::before {
+    background: rgba(225, 6, 0, 0.1);
+}
+.event-card:hover .link-arrow {
+    color: var(--red);
+    gap: 14px;
+}
 
 .timing-strip {
     margin-top: clamp(26px, 3vw, 44px);
@@ -907,7 +951,7 @@ ul, dl { list-style: none; }
 .location { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(24px, 4vw, 70px); align-items: center; }
 
 .location__media { position: relative; border-radius: var(--radius); overflow: hidden; min-height: clamp(340px, 46vw, 658px); }
-.location__map { width: 100%; height: 100%; min-height: inherit; object-fit: cover; object-position: 50% 50%; filter: grayscale(.15) brightness(.85); }
+.location__map { width: 100%; height: 100%; min-height: inherit; border: 0; display: block; }
 .map-chip {
     position: absolute;
     padding: 11px 18px;
@@ -922,9 +966,16 @@ ul, dl { list-style: none; }
     align-items: center;
     gap: 8px;
 }
-.map-chip--coords { top: 20px; left: 20px; }
-.map-chip--here { top: 20px; right: 20px; }
+.map-chip--coords { top: 20px; left: 20px; max-width: 45%; }
+.map-chip--here { top: 20px; right: 20px; max-width: 45%; text-align: right; }
 .map-chip--dist { bottom: 20px; left: 20px; right: 20px; justify-content: space-between; }
+
+/* En pantallas más estrechas (laptop), ajustar chips para evitar superposición */
+@media (max-width: 1366px) {
+    .map-chip--coords { top: 16px; left: 16px; font-size: 11px; padding: 8px 14px; }
+    .map-chip--here { top: 16px; right: 16px; font-size: 11px; padding: 8px 14px; }
+    .map-chip--dist { bottom: 16px; left: 16px; right: 16px; font-size: 11px; }
+}
 .map-chip--dist b { color: var(--white); }
 
 .location__info { display: flex; flex-direction: column; gap: 18px; }
@@ -1019,322 +1070,9 @@ a.footer__value:hover { color: var(--red); }
 
 /* ---------- Nav open body lock ---------- */
 body.nav-open { overflow: hidden; }
-@media (max-width: 1080px) {
-    :root { --header-h: 88px; }
-    .header { height: var(--header-h); }
-    .nav { margin-left: auto; margin-right: clamp(16px, 2.4vw, 32px); }
-
-    /* Apilado: la foto va arriba como banda y el texto debajo.
-       La altura la marca el contenido (min-height: 0), nunca un tope fijo. */
-    .hero { grid-template-columns: 1fr; min-height: 0; }
-    .hero__media { min-height: clamp(300px, 44vw, 460px); order: -1; }
-    .hero__panel { padding-top: clamp(28px, 3.4vw, 48px); padding-bottom: clamp(24px, 3vw, 40px); }
-    .hero__lead { max-width: 40ch; }
-    .hero__stats { margin-top: 4px; }
-    .hero__timer { bottom: clamp(24px, 4vw, 44px); }
-    .hero__sector { bottom: clamp(24px, 4vw, 44px); }
-
-    .menu-grid { grid-template-columns: 1fr 1fr; }
-    .menu-feature { grid-column: 1 / -1; min-height: 440px; }
-    .menu-combo { grid-column: 1 / -1; }
-    .menu-combo__img { width: 100%; aspect-ratio: 16 / 10; }
-
-    .events-grid { grid-template-columns: 1fr; }
-    .editorial { grid-template-columns: 1fr; }
-    .editorial__media { grid-template-columns: 1fr 1fr; }
-    .editorial__img--b { grid-row: 1 / span 2; }
-    .editorial__img--a { height: clamp(200px, 26vw, 320px); }
-    .editorial__img--b { min-height: 0; height: clamp(280px, 38vw, 460px); }
-
-    .location { grid-template-columns: 1fr; }
-
-    .social-card--wide { grid-column: span 12; }
-    .social-card--stat { grid-column: span 4; }
-    .social-card--yt { grid-column: span 8; }
-    .social-card--fb { grid-column: span 12; }
-    .social-card--wa { grid-column: span 12; }
-
-    .footer__top { grid-template-columns: 1fr 1fr; }
-    .footer__cta { grid-column: 1 / -1; }
-}
-
 /* =========================================================
-   RESPONSIVE — DESKTOP / TABLET / IPHONE
-   Los breakpoints conservan las composiciones de los mockups.
-   Escritorio: > 1080px | Tablet: 701–1080px | Móvil: <= 700px
+   RESPONSIVE — MOBILE (≤ 700px)
    ========================================================= */
-
-/* ---------- Pantallas medianas y tablet horizontal ---------- */
-@media (max-width: 1080px) {
-    :root {
-        --header-h: 82px;
-        --pad: clamp(18px, 3.2vw, 38px);
-        --section-pad-y: clamp(54px, 6.4vw, 82px);
-        --gap-grid: clamp(14px, 1.8vw, 20px);
-        --fs-hero: clamp(40px, 5.1vw, 62px);
-        --fs-title: clamp(36px, 4.6vw, 50px);
-        --fs-title-xl: clamp(36px, 4.8vw, 54px);
-    }
-
-    .header {
-        height: var(--header-h);
-        gap: clamp(10px, 1.5vw, 18px);
-        padding-inline: var(--pad);
-    }
-
-    .brand__mark { height: clamp(42px, 5.4vw, 54px); }
-
-    /* La navegación permanece visible como en el mockup tablet. */
-    .nav {
-        display: flex;
-        align-items: center;
-        gap: clamp(9px, 1.5vw, 18px);
-        margin-left: auto;
-        margin-right: clamp(8px, 1.2vw, 16px);
-    }
-
-    .nav a {
-        font-size: clamp(11px, 1.45vw, 15px);
-        letter-spacing: .015em;
-    }
-
-    .header__right { gap: clamp(8px, 1.2vw, 14px); }
-    .live-tag { display: none; }
-
-    .header__reserva {
-        min-height: 42px;
-        padding: 11px clamp(14px, 1.8vw, 22px);
-        font-size: clamp(14px, 1.7vw, 17px);
-    }
-
-    .nav-toggle {
-        display: flex;
-        width: 28px;
-        height: 26px;
-        padding: 5px 0;
-        flex: none;
-    }
-
-    /* Hero: texto a la izquierda e imagen a la derecha. */
-    .hero {
-        grid-template-columns: minmax(0, 1fr) minmax(0, .95fr);
-        min-height: clamp(500px, calc(100svh - var(--header-h)), 700px);
-    }
-
-    .hero__panel {
-        padding: clamp(24px, 3vw, 38px) clamp(18px, 2.8vw, 34px);
-        gap: clamp(14px, 1.8vw, 21px);
-    }
-
-    .hero__title {
-        font-size: clamp(38px, 5vw, 58px);
-        line-height: .96;
-    }
-
-    .hero__lead {
-        max-width: 31ch;
-        font-size: clamp(14px, 1.65vw, 18px);
-    }
-
-    .hero__actions { gap: 10px; margin-top: 6px; }
-    .hero__actions .btn { padding: 13px 17px; min-height: 44px; font-size: 11px; }
-    .hero__stats { gap: clamp(14px, 2.4vw, 28px); padding-top: 20px; }
-    .stat__value { font-size: clamp(28px, 3.5vw, 38px); }
-    .stat__label { font-size: 9px; letter-spacing: .12em; }
-    .hero__foot { padding-top: 18px; font-size: 9px; }
-    .hero__media { min-height: 100%; }
-    .hero__timer { right: 16px; bottom: 22px; padding: 12px; }
-    .hero__timer-value { font-size: clamp(26px, 4vw, 42px); }
-
-    /* Menú tablet: café grande y combo a la izquierda; bebidas/comida a la derecha. */
-    .menu-grid {
-        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-        grid-template-rows: auto auto;
-        align-items: stretch;
-        gap: var(--gap-grid);
-    }
-
-    .menu-feature {
-        grid-column: 1;
-        grid-row: 1;
-        min-height: clamp(390px, 48vw, 520px);
-    }
-
-    .menu-col {
-        grid-column: 2;
-        grid-row: 1 / span 2;
-        grid-template-rows: 1fr 1fr;
-        gap: var(--gap-grid);
-    }
-
-    .menu-item {
-        grid-template-columns: minmax(0, 1fr) minmax(90px, 38%);
-        gap: 10px;
-        padding: clamp(12px, 1.8vw, 20px);
-        align-items: stretch;
-    }
-
-    .menu-item__img {
-        min-height: 90px;
-        aspect-ratio: 1 / 1;
-    }
-
-    .menu-item__title { font-size: clamp(23px, 2.7vw, 32px); }
-    .menu-item .muted { font-size: clamp(11px, 1.3vw, 13px); }
-    .menu-combo {
-        grid-column: 1;
-        grid-row: 2;
-        min-height: 160px;
-        padding: 18px;
-    }
-
-    .menu-combo__img { width: 100%; aspect-ratio: 16 / 10; }
-    .menu-combo::after {
-        background: linear-gradient(90deg, var(--surface-2) 0%, rgba(23,23,26,.96) 48%, rgba(23,23,26,.18) 100%);
-    }
-    .menu-combo__title, .menu-combo__desc, .menu-combo .btn { position: relative; z-index: 2; }
-    .menu-combo__title { font-size: clamp(25px, 3vw, 36px); }
-    .menu-combo__desc { font-size: 12px; }
-
-    /* Race Weekend: evento principal arriba; dos tarjetas en paralelo debajo. */
-    .events-grid {
-        grid-template-columns: minmax(0, 1fr);
-        gap: var(--gap-grid);
-    }
-
-    .event-main { min-height: clamp(300px, 38vw, 410px); }
-    .events-col {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        grid-template-rows: 1fr;
-        gap: var(--gap-grid);
-    }
-
-    .event-card {
-        grid-template-columns: minmax(0, 1fr) minmax(70px, 38%);
-        gap: 10px;
-        padding: 12px;
-        min-width: 0;
-    }
-
-    .event-card__img { height: 100%; min-height: 110px; max-height: 160px; }
-    .event-card__body { padding: 4px; }
-    .event-card__num { font-size: clamp(26px, 3.2vw, 38px); }
-    .event-card__title { font-size: clamp(15px, 1.8vw, 19px); }
-    .event-card__meta { font-size: 10px; }
-
-    .timing-strip { margin-top: 14px; }
-
-    /* Editorial conserva palabras y fotografía en columnas. */
-    .editorial {
-        grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr);
-        gap: clamp(16px, 2.8vw, 30px);
-    }
-
-    .bigword { font-size: clamp(38px, 5.1vw, 58px); }
-    .editorial__copy { margin: 18px 0; font-size: clamp(12px, 1.45vw, 14px); }
-    .editorial__stats { gap: clamp(14px, 2vw, 24px); padding-top: 16px; }
-    .stat--editorial .stat__value { font-size: clamp(27px, 3vw, 36px); }
-    .editorial__media { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
-    .editorial__img--a { height: clamp(150px, 22vw, 230px); }
-    .editorial__img--b { height: clamp(230px, 34vw, 360px); min-height: 0; }
-    .editorial__img--b { grid-row: 1 / span 2; }
-    .pitwall { padding: clamp(10px, 1.4vw, 16px); }
-    .pitwall__quote { font-size: clamp(11px, 1.35vw, 13px); }
-
-    /* En el mockup tablet el mapa ocupa la parte superior de la tarjeta. */
-    .location {
-        grid-template-columns: minmax(0, 1fr);
-        gap: 0;
-    }
-
-    .location__media {
-        min-height: clamp(230px, 34vw, 340px);
-        border-radius: var(--radius) var(--radius) 0 0;
-    }
-
-    .location__info {
-        display: grid;
-        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-        align-items: center;
-        gap: 14px 24px;
-        padding: clamp(18px, 2.4vw, 28px);
-        border: 1px solid var(--line-soft);
-        border-top: 0;
-        border-radius: 0 0 var(--radius) var(--radius);
-    }
-
-    .location__info > * { min-width: 0; }
-    .location__actions { grid-column: 1 / -1; }
-
-    /* Social y footer se mantienen en mosaico. */
-    .social-grid { grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 12px; }
-    .social-card--wide { grid-column: span 3; min-height: 210px; }
-    .social-card--stat { grid-column: span 3; min-height: 210px; }
-    .social-card--yt { grid-column: span 3; min-height: 210px; }
-    .social-card--fb, .social-card--wa { grid-column: span 3; min-height: 150px; }
-
-    .footer__top { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 24px; }
-    .footer__cta { grid-column: 1 / -1; }
-}
-
-/* ---------- Tablet vertical / teléfonos grandes ---------- */
-@media (max-width: 820px) and (min-width: 701px) {
-    :root { --pad: clamp(16px, 2.5vw, 22px); }
-
-    .header { gap: 8px; }
-    .brand__mark { height: 42px; }
-    .nav { gap: clamp(7px, 1.15vw, 10px); }
-    .nav a { font-size: clamp(10px, 1.35vw, 12px); }
-    .header__reserva { padding-inline: 12px; font-size: 13px; min-height: 38px; }
-
-    .hero {
-        grid-template-columns: minmax(0, .95fr) minmax(0, 1.05fr);
-        min-height: clamp(470px, 66vw, 590px);
-    }
-
-    .hero__panel { padding: 22px 16px; gap: 13px; }
-    .hero__title { font-size: clamp(34px, 5.3vw, 44px); }
-    .hero__lead { font-size: 13px; }
-    .hero__actions .btn { padding: 11px 12px; font-size: 10px; }
-    .hero__stats { gap: 12px; }
-    .stat__value { font-size: 27px; }
-    .stat__label { font-size: 8px; }
-
-    .menu-feature { min-height: 390px; }
-    .menu-feature__title { font-size: clamp(34px, 5vw, 46px); }
-    .menu-item { grid-template-columns: minmax(0, 1fr) minmax(76px, 34%); padding: 10px; }
-    .menu-item__title { font-size: 22px; }
-    .menu-item .muted { font-size: 10px; }
-    .menu-combo { min-height: 130px; padding: 14px; }
-    .menu-combo__title { font-size: 25px; }
-    .menu-combo__desc { font-size: 10px; }
-
-    .event-main { min-height: 290px; }
-    .event-main__title { font-size: clamp(24px, 4vw, 34px); }
-    .event-card { grid-template-columns: minmax(0, 1fr) minmax(64px, 34%); padding: 9px; }
-    .event-card__img { min-height: 90px; }
-    .event-card__body { gap: 3px; }
-
-    .editorial { grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); gap: 14px; }
-    .bigword { font-size: clamp(34px, 5vw, 42px); }
-    .editorial__copy { font-size: 11px; margin: 12px 0; }
-    .editorial__stats { gap: 12px; }
-    .stat--editorial .stat__value { font-size: 25px; }
-    .editorial__img--a { height: 145px; }
-    .editorial__img--b { height: 230px; }
-    .pitwall { padding: 8px; }
-    .pitwall__quote { font-size: 10px; }
-
-    .location__media { min-height: 220px; }
-    .location__info { padding: 14px; gap: 10px; }
-    .location__info p, .location__info li { font-size: 11px; }
-
-    .social-card { padding: 16px; }
-    .social-card--wide, .social-card--stat, .social-card--yt { min-height: 170px; }
-    .social-card--fb, .social-card--wa { min-height: 120px; }
-}
-
-/* ---------- iPhone / móvil ---------- */
 @media (max-width: 700px) {
     :root {
         --header-h: 68px;
@@ -1348,6 +1086,7 @@ body.nav-open { overflow: hidden; }
 
     html { scroll-padding-top: calc(var(--header-h) + 10px); }
 
+    /* ---------- Header ---------- */
     .header {
         height: var(--header-h);
         padding-inline: var(--pad);
@@ -1368,6 +1107,7 @@ body.nav-open { overflow: hidden; }
     .nav-toggle { display: flex; width: 25px; height: 24px; padding: 4px 0; }
     .nav-toggle span { height: 2px; }
 
+    /* ---------- Nav móvil ---------- */
     .nav {
         position: fixed;
         inset: var(--header-h) 0 auto 0;
@@ -1409,7 +1149,7 @@ body.nav-open { overflow: hidden; }
     .nav-toggle.is-active span:nth-child(2) { opacity: 0; }
     .nav-toggle.is-active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
-    /* Hero móvil: primero texto, luego imagen, como el mockup iPhone. */
+    /* ---------- Hero móvil: SIN imagen principal ---------- */
     .hero {
         display: flex;
         flex-direction: column;
@@ -1435,28 +1175,39 @@ body.nav-open { overflow: hidden; }
     .hero__foot { padding-top: 10px; font-size: 8px; letter-spacing: .1em; }
     .hero__media {
         order: 2;
-        min-height: clamp(210px, 58vw, 300px);
-        width: 100%;
+        display: none; /* Mockup móvil: no muestra la fotografía principal */
     }
-    .hero__media img { object-position: 56% 50%; }
     .hero__timer { right: 12px; bottom: 12px; padding: 9px 11px; gap: 3px; border-radius: 10px; }
     .hero__timer-value { font-size: 27px; }
     .hero__timer-label { font-size: 8px; }
     .hero__sector { display: none; }
 
+    /* ---------- Barra de recorrido móvil ---------- */
+    .race-progress {
+        min-height: 54px;
+        grid-template-columns: auto auto minmax(40px, 1fr) auto;
+        gap: 8px;
+        padding: 8px var(--pad);
+    }
+    .race-progress__dash, .race-progress__label, .race-progress__distance { display: none; }
+    .race-progress__start { min-width: 70px; padding: 8px 10px; font-size: 9px; }
+    .race-progress__finish { font-size: 15px; }
+    .race-progress__track { min-width: 35px; height: 4px; }
+
+    /* ---------- Secciones ---------- */
     .section { padding-inline: var(--pad); }
     .section__head { align-items: flex-start; gap: 12px; }
     .section__head > * { min-width: 0; }
     .section__head .lead { max-width: 24ch; font-size: 11px; }
     .eyebrow { font-size: 9px; letter-spacing: .15em; }
 
-    /* Intro compacto y centrado. */
+    /* ---------- Intro ---------- */
     .section--intro { text-align: center; }
     .section--intro .title { margin: 14px auto 14px; font-size: clamp(27px, 7.8vw, 36px); }
     .section--intro .lead { font-size: 12px; line-height: 1.45; max-width: 34ch; }
     .section--intro .eyebrow { font-size: 8px; }
 
-    /* Menú móvil: café, combo, bebidas y comida en una sola columna. */
+    /* ---------- Menú móvil: orden cafés → combo F1 → bebidas → comida ---------- */
     .menu-grid {
         display: flex;
         flex-direction: column;
@@ -1514,7 +1265,7 @@ body.nav-open { overflow: hidden; }
     .menu-item__img { order: -1; width: 100%; min-height: 0; aspect-ratio: 16 / 10; height: auto; border-radius: 12px; object-fit: cover; object-position: 50% 45%; }
     .menu-num--sm { font-size: 26px; }
 
-    /* Race Weekend: evento principal y tarjetas secundarias apilados. */
+    /* ---------- Race Weekend móvil: vertical + tarjetas secundarias ---------- */
     .events-grid { grid-template-columns: minmax(0, 1fr); gap: 12px; margin-top: 18px; }
     .event-main { min-height: clamp(250px, 72vw, 330px); padding: 16px; }
     .event-main__gp-num { font-size: 58px; }
@@ -1536,21 +1287,21 @@ body.nav-open { overflow: hidden; }
     .timing-strip { padding: 12px; border-radius: 10px; gap: 8px; }
     .timing-strip__next { margin-left: 0; }
 
-    /* Editorial: primero el manifiesto, luego sus recursos visuales. */
+    /* ---------- Racing Spirit (Editorial) móvil ---------- */
     .editorial { grid-template-columns: minmax(0, 1fr); gap: 18px; margin-top: 18px; }
     .bigword { font-size: clamp(36px, 10vw, 46px); line-height: .9; }
     .editorial__copy { font-size: 12px; line-height: 1.5; margin: 12px 0; max-width: 38ch; }
     .editorial__stats { gap: 22px; padding-top: 14px; }
     .stat--editorial .stat__value { font-size: 29px; }
-    .editorial__media { grid-template-columns: minmax(0, 1fr); gap: 10px; }
-    .editorial__img--a { grid-column: 1; grid-row: auto; height: clamp(150px, 45vw, 210px); }
-    .editorial__img--b { grid-column: 1; grid-row: auto; height: clamp(210px, 62vw, 290px); min-height: 0; }
-    .pitwall { grid-column: 1; padding: 12px; }
+    .editorial__media { grid-template-columns: minmax(0, 1fr); grid-template-rows: auto auto; gap: 12px; }
+    .editorial__img--a { grid-column: 1; grid-row: 1; height: clamp(160px, 50vw, 220px); object-position: 55% 50%; }
+    .editorial__img--b { grid-column: 1; grid-row: 2; height: clamp(200px, 65vw, 300px); min-height: 0; object-position: 50% 30%; }
+    .pitwall { grid-column: 1; grid-row: 3; padding: 12px; align-self: start; }
     .pitwall__quote { font-size: 12px; }
 
-    /* Ubicación: mapa y datos en una tarjeta vertical. */
+    /* ---------- Ubicación móvil: ocultar mapa, tarjeta informativa ---------- */
     .location { grid-template-columns: minmax(0, 1fr); gap: 0; }
-    .location__media { min-height: 190px; border-radius: 12px 12px 0 0; }
+    .location__media { display: none; } /* Mapa oculto en móvil */
     .location__info {
         display: flex;
         flex-direction: column;
@@ -1565,7 +1316,7 @@ body.nav-open { overflow: hidden; }
     .location__actions { display: flex; flex-wrap: wrap; gap: 8px; }
     .location__actions .btn { flex: 1 1 130px; min-height: 38px; padding: 10px 12px; font-size: 9px; }
 
-    /* Mosaico social en una columna; tarjetas pequeñas comparten fila. */
+    /* ---------- Redes sociales móvil: 2 columnas ---------- */
     .social__head { align-items: flex-start; gap: 10px; }
     .social__head .lead { max-width: 20ch; font-size: 10px; }
     .social-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 9px; }
@@ -1577,45 +1328,229 @@ body.nav-open { overflow: hidden; }
     .social-card__title { font-size: 16px; }
     .social-card__value { font-size: 28px; }
 
-    /* Footer en una columna, con acciones a ancho completo. */
+    /* ---------- Footer móvil: 1 columna ---------- */
     .footer__top { grid-template-columns: minmax(0, 1fr); gap: 22px; }
     .footer__cta { grid-column: 1; }
     .footer__cta-buttons { display: flex; flex-wrap: wrap; gap: 9px; }
     .footer__cta-buttons .btn { flex: 1 1 130px; min-height: 40px; padding: 11px 12px; font-size: 10px; }
     .footer__bottom { flex-direction: column; align-items: flex-start; gap: 10px; }
-    .footer__legal { font-size: 9px; }
 }
 
-/* ---------- iPhone compacto ---------- */
-@media (max-width: 390px) {
-    :root { --pad: 14px; }
+/* =========================================================
+   RESPONSIVE — TABLET (701px – 1080px)
+   ========================================================= */
+@media (min-width: 701px) and (max-width: 1080px) {
+    :root {
+        --header-h: 82px;
+        --pad: clamp(18px, 3.2vw, 38px);
+        --section-pad-y: clamp(54px, 6.4vw, 82px);
+        --gap-grid: clamp(14px, 1.8vw, 20px);
+        --fs-hero: clamp(40px, 5.1vw, 62px);
+        --fs-title: clamp(36px, 4.6vw, 50px);
+        --fs-title-xl: clamp(36px, 4.8vw, 54px);
+    }
 
-    .brand__mark { height: 36px; max-width: 108px; }
-    .header__reserva { padding: 8px 12px; font-size: 12px; min-height: 34px; }
-    .nav-toggle { width: 22px; }
+    /* ---------- Header compacto ---------- */
+    .header {
+        height: var(--header-h);
+        gap: clamp(10px, 1.5vw, 18px);
+        padding-inline: var(--pad);
+    }
 
-    .hero__panel { padding: 20px var(--pad) 18px; }
-    .hero__title { font-size: clamp(31px, 9.7vw, 38px); }
-    .hero__lead { font-size: 12px; }
-    .hero__actions .btn { padding: 9px 10px; font-size: 8px; }
-    .hero__stats { gap: 12px 17px; }
-    .stat__value { font-size: 25px; }
+    .brand__mark { height: clamp(42px, 5.4vw, 54px); }
 
-    .section--intro .title { font-size: 26px; }
-    .menu-feature { min-height: 270px; }
-    .menu-feature__title { font-size: 32px; }
-    .menu-combo { min-height: 112px; }
-    .menu-combo__title { font-size: 24px; }
-    .menu-item { display: flex; flex-direction: column; padding: 10px; }
-    .menu-item__title { font-size: 23px; }
+    .nav {
+        display: flex;
+        align-items: center;
+        gap: clamp(9px, 1.5vw, 18px);
+        margin-left: auto;
+        margin-right: clamp(8px, 1.2vw, 16px);
+    }
 
-    .event-main { min-height: 235px; }
-    .event-card__title { font-size: 12px; }
-    .bigword { font-size: 34px; }
-    .editorial__stats { gap: 16px; }
-    .stat--editorial .stat__value { font-size: 25px; }
-    .social-card--fb, .social-card--wa { padding: 9px; min-height: 105px; }
+    .nav a {
+        font-size: clamp(11px, 1.45vw, 15px);
+        letter-spacing: .015em;
+    }
+
+    .header__right { gap: clamp(8px, 1.2vw, 14px); }
+    .live-tag { display: none; }
+
+    .header__reserva {
+        min-height: 42px;
+        padding: 11px clamp(14px, 1.8vw, 22px);
+        font-size: clamp(14px, 1.7vw, 17px);
+    }
+
+    .nav-toggle {
+        display: flex;
+        width: 28px;
+        height: 26px;
+        padding: 5px 0;
+        flex: none;
+    }
+
+    /* ---------- Hero tablet: dos columnas ---------- */
+    .hero {
+        grid-template-columns: minmax(0, .92fr) minmax(0, 1.08fr);
+        min-height: clamp(500px, calc(100svh - var(--header-h)), 700px);
+    }
+
+    .hero__panel {
+        padding: clamp(24px, 3vw, 38px) clamp(18px, 2.8vw, 34px);
+        gap: clamp(14px, 1.8vw, 21px);
+    }
+
+    .hero__title { font-size: clamp(38px, 5vw, 58px); line-height: .96; }
+    .hero__lead { max-width: 31ch; font-size: clamp(14px, 1.65vw, 18px); }
+    .hero__actions { gap: 10px; margin-top: 6px; }
+    .hero__actions .btn { padding: 13px 17px; min-height: 44px; font-size: 11px; }
+    .hero__stats { gap: clamp(14px, 2.4vw, 28px); padding-top: 20px; }
+    .stat__value { font-size: clamp(28px, 3.5vw, 38px); }
+    .stat__label { font-size: 9px; letter-spacing: .12em; }
+    .hero__foot { padding-top: 18px; font-size: 9px; }
+    .hero__media { min-height: 100%; }
+    .hero__timer { right: 16px; bottom: 22px; padding: 12px; }
+    .hero__timer-value { font-size: clamp(26px, 4vw, 42px); }
+
+    /* ---------- Menú tablet ---------- */
+    .menu-grid {
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        grid-template-rows: auto auto;
+        align-items: stretch;
+        gap: var(--gap-grid);
+    }
+
+    .menu-feature {
+        grid-column: 1;
+        grid-row: 1;
+        min-height: clamp(390px, 48vw, 520px);
+    }
+
+    .menu-col {
+        grid-column: 2;
+        grid-row: 1 / span 2;
+        grid-template-rows: 1fr 1fr;
+        gap: var(--gap-grid);
+    }
+
+    .menu-item {
+        grid-template-columns: minmax(0, 1fr) minmax(100px, 40%);
+        gap: 10px;
+        padding: clamp(12px, 1.8vw, 20px);
+        align-items: stretch;
+    }
+
+    .menu-item__img {
+        min-height: 100px;
+        aspect-ratio: 1 / 1;
+    }
+
+    .menu-item__title { font-size: clamp(23px, 2.7vw, 32px); }
+    .menu-item .muted { font-size: clamp(11px, 1.3vw, 13px); }
+    .menu-item .link-arrow { font-size: clamp(10px, 0.9vw, 11px); }
+    .menu-combo {
+        grid-column: 1;
+        grid-row: 2;
+        min-height: 160px;
+        padding: 18px;
+    }
+
+    .menu-combo__img { width: 100%; aspect-ratio: 16 / 10; }
+    .menu-combo::after {
+        background: linear-gradient(90deg, var(--surface-2) 0%, rgba(23,23,26,.96) 48%, rgba(23,23,26,.18) 100%);
+    }
+    .menu-combo__title, .menu-combo__desc, .menu-combo .btn { position: relative; z-index: 2; }
+    .menu-combo__title { font-size: clamp(25px, 3vw, 36px); }
+    .menu-combo__desc { font-size: 12px; }
+
+    /* ---------- Race Weekend tablet ---------- */
+    .events-grid {
+        grid-template-columns: minmax(0, 1fr);
+        gap: var(--gap-grid);
+    }
+
+    .event-main { min-height: clamp(300px, 38vw, 410px); }
+    .events-col {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        grid-template-rows: 1fr;
+        gap: var(--gap-grid);
+    }
+
+    .event-card {
+        grid-template-columns: minmax(0, 1fr) minmax(70px, 38%);
+        gap: 10px;
+        padding: 12px;
+        min-width: 0;
+    }
+
+    .event-card__img { height: 100%; min-height: 110px; max-height: 160px; }
+    .event-card__body { padding: 4px; }
+    .event-card__num { font-size: clamp(26px, 3.2vw, 38px); }
+    .event-card__title { font-size: clamp(15px, 1.8vw, 19px); }
+    .event-card__meta { font-size: 10px; }
+
+    .timing-strip { margin-top: 14px; }
+
+    /* ---------- Editorial tablet ---------- */
+    .editorial {
+        grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr);
+        gap: clamp(16px, 2.8vw, 30px);
+    }
+
+    .bigword { font-size: clamp(38px, 5.1vw, 58px); }
+    .editorial__copy { margin: 18px 0; font-size: clamp(12px, 1.45vw, 14px); }
+    .editorial__stats { gap: clamp(14px, 2vw, 24px); padding-top: 16px; }
+    .stat--editorial .stat__value { font-size: clamp(27px, 3vw, 36px); }
+    .editorial__media {
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        grid-template-rows: auto auto;
+        gap: 16px;
+    }
+    .editorial__img--a { grid-column: 2; grid-row: 1; height: clamp(150px, 22vw, 230px); object-position: 55% 50%; }
+    .editorial__img--b { grid-column: 1; grid-row: 1 / span 2; height: clamp(230px, 34vw, 360px); min-height: 0; object-position: 50% 30%; }
+    .pitwall { grid-column: 2; grid-row: 2; align-self: end; padding: clamp(10px, 1.4vw, 16px); }
+    .pitwall__quote { font-size: clamp(11px, 1.35vw, 13px); }
+
+    /* ---------- Ubicación tablet: ocultar mapa, mostrar tarjeta informativa ---------- */
+    .location {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 0;
+    }
+
+    .location__media { display: none; } /* Mapa oculto en tablet */
+
+    .location__info {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        align-items: center;
+        gap: 14px 24px;
+        padding: clamp(18px, 2.4vw, 28px);
+        border: 1px solid var(--line-soft);
+        border-top: 0;
+        border-radius: 0 0 var(--radius) var(--radius);
+    }
+
+    .location__info > * { min-width: 0; }
+    .location__actions { grid-column: 1 / -1; }
+
+    /* ---------- Redes sociales tablet ---------- */
+    .social-grid { grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 12px; }
+    .social-card--wide { grid-column: span 3; min-height: 210px; }
+    .social-card--stat { grid-column: span 3; min-height: 210px; }
+    .social-card--yt { grid-column: span 3; min-height: 210px; }
+    .social-card--fb, .social-card--wa { grid-column: span 3; min-height: 150px; }
+
+    /* ---------- Footer tablet ---------- */
+    .footer__top { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 24px; }
+    .footer__cta { grid-column: 1 / -1; }
 }
+
+/* =========================================================
+   RESPONSIVE — DESKTOP / TABLET / IPHONE
+   Los breakpoints conservan las composiciones de los mockups.
+   Escritorio: > 1080px | Tablet: 701–1080px | Móvil: <= 700px
+   ========================================================= */
+
 
 /* ---------- Accesibilidad y dispositivos táctiles ---------- */
 @media (hover: none) {
@@ -1663,15 +1598,8 @@ body.nav-open { overflow: hidden; }
     max-width: 34ch;
 }
 
-@media (max-width: 700px) {
-    .hero__count { font-size: 8px; letter-spacing: .1em; }
-    .footer__brand { max-width: 100%; }
-}
-
-
 /* =========================================================
-   PIT STOP — AJUSTES VISUALES DE REFERENCIA (NOV 2026)
-   Cabecera centrada, barra de recorrido fija y eventos desktop.
+   RESPONSIVE — DESKTOP (≥ 1081px)
    ========================================================= */
 @media (min-width: 1081px) {
   .header {
@@ -1688,17 +1616,25 @@ body.nav-open { overflow: hidden; }
     gap: clamp(28px, 3vw, 48px);
   }
   .header > .header__right { grid-column: 3; justify-self: end; margin-left: 0; }
-}
-@media (min-width: 701px) and (max-width: 1080px) {
-  .header {
-    display: grid;
-    grid-template-columns: minmax(112px, .8fr) auto minmax(150px, .8fr);
-    column-gap: 10px;
+
+  .section--events { padding-top: clamp(54px, 5vw, 76px); }
+  .events-grid {
+    grid-template-columns: minmax(0, 1.72fr) minmax(300px, .9fr);
+    gap: clamp(18px, 1.5vw, 24px);
+    align-items: stretch;
+    margin-top: 34px;
   }
-  .header > .brand { grid-column: 1; justify-self: start; }
-  .header > .nav { grid-column: 2; justify-self: center; margin: 0; gap: clamp(10px, 1.7vw, 20px); }
-  .header > .header__right { grid-column: 3; justify-self: end; margin: 0; gap: 10px; }
-  .header__reserva { padding-inline: 16px; }
+  .event-main { min-height: clamp(390px, 35vw, 470px); padding: 22px; }
+  .event-main__img { object-position: center center; }
+  .event-main__gp-num { font-size: clamp(64px, 5.5vw, 82px); }
+  .event-main__info { max-width: min(70%, 620px); }
+  .event-main__cta { right: 20px; bottom: 22px; }
+  .events-col { grid-template-columns: 1fr; grid-template-rows: repeat(2, minmax(0, 1fr)); gap: 18px; }
+  .event-card { grid-template-columns: minmax(110px, 43%) minmax(0, 1fr); gap: 14px; padding: 13px; min-height: 0; }
+  .event-card__img { min-height: 0; height: 100%; max-height: 190px; aspect-ratio: 1 / 1; }
+  .event-card__body { min-width: 0; padding: 5px 3px; }
+  .event-card__title { font-size: clamp(15px, 1.2vw, 19px); }
+  .timing-strip { margin-top: 30px; }
 }
 
 .race-progress {
@@ -1730,76 +1666,20 @@ body.nav-open { overflow: hidden; }
 .race-progress__fill { display: block; width: 0%; height: 100%; background: var(--red); transition: width .08s linear; }
 .race-progress__finish { font-family: var(--title); font-size: 20px; line-height: 1; color: var(--white); white-space: nowrap; }
 
-/* La sección de eventos reproduce el bloque principal + dos tarjetas laterales. */
-@media (min-width: 1081px) {
-  .section--events { padding-top: clamp(54px, 5vw, 76px); }
-  .events-grid {
-    grid-template-columns: minmax(0, 1.72fr) minmax(300px, .9fr);
-    gap: clamp(18px, 1.5vw, 24px);
-    align-items: stretch;
+
+.driver-quotes {
     margin-top: 34px;
-  }
-  .event-main { min-height: clamp(390px, 35vw, 470px); padding: 22px; }
-  .event-main__img { object-position: center center; }
-  .event-main__gp-num { font-size: clamp(64px, 5.5vw, 82px); }
-  .event-main__info { max-width: min(70%, 620px); }
-  .event-main__cta { right: 20px; bottom: 22px; }
-  .events-col { grid-template-columns: 1fr; grid-template-rows: repeat(2, minmax(0, 1fr)); gap: 18px; }
-  .event-card { grid-template-columns: minmax(110px, 43%) minmax(0, 1fr); gap: 14px; padding: 13px; min-height: 0; }
-  .event-card__img { min-height: 0; height: 100%; max-height: 190px; aspect-ratio: 1 / 1; }
-  .event-card__body { min-width: 0; padding: 5px 3px; }
-  .event-card__title { font-size: clamp(15px, 1.2vw, 19px); }
-  .timing-strip { margin-top: 30px; }
+    padding-top: 20px;
+    border-top: 1px solid var(--line-soft);
 }
-
-@media (max-width: 700px) {
-  .race-progress {
-    min-height: 54px;
-    grid-template-columns: auto auto minmax(40px, 1fr) auto;
-    gap: 8px;
-    padding: 8px var(--pad);
-  }
-  .race-progress__dash, .race-progress__label, .race-progress__distance { display: none; }
-  .race-progress__start { min-width: 70px; padding: 8px 10px; font-size: 9px; }
-  .race-progress__finish { font-size: 15px; }
-  .race-progress__track { min-width: 35px; height: 4px; }
-}
-@media (prefers-reduced-motion: reduce) {
-  .race-progress__fill { transition: none; }
-}
-
-@media (min-width: 701px) and (max-width: 1080px) {
-  /* Tablet: conservar el hero en dos columnas, como en el mockup. */
-  .hero {
-    grid-template-columns: minmax(0, .92fr) minmax(0, 1.08fr);
-    min-height: clamp(480px, 62vw, 620px);
-  }
-  .hero__media { order: initial; min-height: 100%; }
-  .hero__panel { padding: clamp(24px, 3vw, 38px) var(--pad); }
-  .hero__timer { right: 16px; bottom: 24px; padding: 12px; }
-  .hero__sector { left: 16px; bottom: 24px; padding: 10px 14px; }
-
-  /* Eventos: principal arriba; las dos tarjetas comparten la fila inferior. */
-  .events-grid { grid-template-columns: minmax(0, 1fr); gap: var(--gap-grid); }
-  .event-main { min-height: clamp(300px, 38vw, 390px); }
-  .events-col {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    grid-template-rows: 1fr;
-    gap: var(--gap-grid);
-  }
-  .event-card { grid-template-columns: minmax(0, 1fr) minmax(90px, 38%); padding: 12px; }
-  .event-card__img { height: 100%; min-height: 120px; max-height: 170px; }
-
-}
-
 
 .driver-quotes__track {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 72px;
+    gap: 120px;
     width: max-content;
-    animation: driverQuotesMarquee 36s linear infinite;
+    animation: driverQuotesMarquee 24s linear infinite;
 }
 
 .driver-quotes:hover .driver-quotes__track {
@@ -1808,10 +1688,18 @@ body.nav-open { overflow: hidden; }
 
 .driver-quote {
     font-family: var(--title);
-    font-size: clamp(18px, 2vw, 26px);
+    font-size: clamp(20px, 2.5vw, 32px);
     line-height: 1.3;
     color: var(--white);
     white-space: nowrap;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+    opacity: 0.9;
+    transition: opacity 0.3s ease;
+}
+
+.driver-quote:hover {
+    opacity: 1;
+    color: var(--red);
 }
 
 @keyframes driverQuotesMarquee {
@@ -1821,4 +1709,118 @@ body.nav-open { overflow: hidden; }
 
 @media (prefers-reduced-motion: reduce) {
     .driver-quotes__track { animation: none; }
+}
+
+/* ---------- Panel de reserva ---------- */
+.reserva-panel {
+    position: fixed;
+    inset: 0;
+    z-index: 200;
+    background: rgba(11, 11, 13, 0.85);
+    backdrop-filter: blur(8px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--pad);
+    overflow-y: auto;
+}
+.reserva-panel[hidden] { display: none; }
+.reserva-panel__overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    cursor: pointer;
+}
+.reserva-panel__card {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    max-width: 420px;
+    max-height: 90vh;
+    overflow-y: auto;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 28px;
+    box-shadow: 0 24px 60px rgba(0,0,0,0.4);
+}
+.reserva-panel__cerrar {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    color: var(--gray);
+    border-radius: 50%;
+    background: rgba(255,255,255,0.05);
+    cursor: pointer;
+}
+.reserva-panel__cerrar:hover { color: var(--white); background: rgba(255,255,255,0.1); }
+.reserva-panel__titulo {
+    font-family: var(--title);
+    font-size: clamp(24px, 4vw, 32px);
+    line-height: 1;
+    margin-bottom: 8px;
+    letter-spacing: .02em;
+    text-transform: uppercase;
+}
+.reserva-panel__subtitulo {
+    color: var(--gray);
+    font-size: clamp(13px, 1.2vw, 15px);
+    line-height: 1.5;
+    margin-bottom: 24px;
+}
+.reserva-panel__form { display: flex; flex-direction: column; gap: 16px; }
+.reserva-panel__grupo { display: flex; flex-direction: column; gap: 6px; }
+.reserva-panel__label {
+    font-size: var(--fs-label);
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    color: var(--gray);
+    font-weight: 700;
+}
+.reserva-panel__input,
+.reserva-panel__select {
+    background: var(--bg);
+    border: 1px solid var(--line-soft);
+    border-radius: var(--radius-sm);
+    color: var(--white);
+    padding: 10px 14px;
+    font-size: clamp(13px, 1.1vw, 15px);
+    font-family: inherit;
+}
+.reserva-panel__input::placeholder { color: rgba(169,169,169,0.4); }
+.reserva-panel__select { cursor: pointer; }
+.reserva-panel__checkbox {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: clamp(12px, 1vw, 14px);
+    color: var(--white);
+    cursor: pointer;
+}
+.reserva-panel__checkbox input { accent-color: var(--red); }
+.reserva-panel__btn {
+    margin-top: 8px;
+    padding: 14px 24px;
+    font-size: clamp(14px, 1.3vw, 16px);
+    font-weight: 700;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    background: var(--red);
+    color: #fff;
+    border: none;
+    border-radius: var(--radius-btn);
+    cursor: pointer;
+}
+.reserva-panel__btn:hover { background: #fff; color: var(--bg); }
+
+@media (max-width: 700px) {
+    .reserva-panel__card { padding: 20px; max-width: 100%; }
+    .reserva-panel__titulo { font-size: 20px; }
+    .reserva-panel__subtitulo { font-size: 12px; margin-bottom: 16px; }
 }

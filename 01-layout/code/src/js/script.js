@@ -633,6 +633,64 @@
 
 
     /* =====================================================
+       8. PANEL DE RESERVA
+       ===================================================== */
+
+    var reservaPanel = doc.getElementById('reserva-panel');
+    var reservaBtns = doc.querySelectorAll('[data-action="reserva"]');
+    var reservaCerrar = doc.querySelectorAll('[data-cerrar-reserva]');
+    var reservaForm = doc.querySelector('.reserva-panel__form');
+
+    function abrirReserva() {
+        if (reservaPanel) {
+            reservaPanel.hidden = false;
+            reservaPanel.setAttribute('aria-modal', 'true');
+            doc.body.classList.add('nav-open');
+        }
+    }
+
+    function cerrarReserva() {
+        if (reservaPanel) {
+            reservaPanel.hidden = true;
+            reservaPanel.removeAttribute('aria-modal');
+            doc.body.classList.remove('nav-open');
+        }
+    }
+
+    for (var i = 0; i < reservaBtns.length; i += 1) {
+        reservaBtns[i].addEventListener('click', abrirReserva);
+    }
+
+    for (var j = 0; j < reservaCerrar.length; j += 1) {
+        reservaCerrar[j].addEventListener('click', cerrarReserva);
+    }
+
+    if (reservaForm) {
+        reservaForm.addEventListener('submit', function (event) {
+            event.preventDefault();
+            var formData = new FormData(reservaForm);
+            var datos = {};
+            for (var pair of formData.entries()) {
+                datos[pair[0]] = pair[1];
+            }
+            console.log('Reserva enviada:', datos);
+            alert('Reserva recibida. Nos pondremos en contacto contigo para confirmar.');
+            cerrarReserva();
+        });
+    }
+
+    doc.addEventListener('keydown', function (event) {
+        if (
+            event.key === 'Escape' &&
+            reservaPanel &&
+            reservaPanel.hidden === false
+        ) {
+            cerrarReserva();
+        }
+    });
+
+
+    /* =====================================================
        FIN DEL SCRIPT — PIT STOP CAFÉ BAR
        ===================================================== */
 

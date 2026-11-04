@@ -31,7 +31,7 @@
 
             <div class="header__right">
                 <span class="live-tag"><span class="dot dot--red"></span>LAP 01 / LIVE</span>
-                <a class="btn btn--primary header__reserva" href="#reservas">RESERVAS</a>
+                <button class="btn btn--primary header__reserva" data-action="reserva" type="button">RESERVAS</button>
                 <button class="nav-toggle" aria-label="Abrir menú" aria-controls="primary-nav" aria-expanded="false">
                     <span></span><span></span><span></span>
                 </button>
@@ -61,7 +61,7 @@
                     </h1>
                     <p class="hero__lead">Café de Especialidad, buena música y toda la emoción de las pistas.</p>
                     <div class="hero__actions">
-                        <a class="btn btn--primary btn--lg" href="#reservas">RESERVA TU MESA</a>
+                        <button class="btn btn--primary btn--lg" data-action="reserva" type="button">RESERVA TU MESA</button>
                         <a class="btn btn--ghost btn--lg" href="#menu">VER MENÚ
                             <svg class="ico" viewBox="0 0 19.233 15" aria-hidden="true"><use href="#ico-arrow"></use></svg>
                         </a>
@@ -119,8 +119,11 @@
                     <div class="driver-quotes__track">
                         <p class="driver-quote">“Si no buscamos el hueco, no somos corredores.” — Ayrton Senna</p>
                         <p class="driver-quote">“Ser segundo es ser el primero de los que pierden.” — Ayrton Senna</p>
-                        <p class="driver-quote">“Si no buscamos el hueco, no somos corredores.” — Ayrton Senna</p>
-                        <p class="driver-quote">“Ser segundo es ser el primero de los que pierden.” — Ayrton Senna</p>
+                        <p class="driver-quote">“La victoria te pertenece, solo tienes que alcanzarla.” — Michael Schumacher</p>
+                        <p class="driver-quote">“No sueño con la victoria, sueño con el desafío.” — Lewis Hamilton</p>
+                        <p class="driver-quote">“Si no buscas el riesgo, no eres un corredor.” — Niki Lauda</p>
+                        <p class="driver-quote">“La perfección no existe, pero podemos perseguirla.” — Fernando Alonso</p>
+                        <p class="driver-quote">“Los límites son como las carreras: están para superarlos.” — Max Verstappen</p>
                     </div>
                 </div>
             </section>
@@ -294,9 +297,9 @@
             <section class="section section--location" id="ubicacion">
                 <div class="location">
                     <div class="location__media">
-                        <img class="location__map" src="src/imgs/ubicacion.png" alt="Mapa de ubicación">
+                        <iframe class="location__map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3976.783941780218!2d-75.513811!3d5.070275!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0%3A0%3A0!2zNsKwMzknMDcuOSojoCcwNznAxIiw!5e0!3m2!1ses!2sco!4v1!5m2!1ses!2sco" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" aria-label="Mapa de ubicación de Pit Stop Café Bar"></iframe>
                         <span class="map-chip map-chip--coords">5.070275º N — 75.513811º W</span>
-                        <span class="map-chip map-chip--here"><span class="dot dot--white"></span>P1 — Here we are.</span>
+                        <span class="map-chip map-chip--here"><span class="dot dot--white"></span>P1 — Aquí estamos.</span>
                         <span class="map-chip map-chip--dist">Av 12 de Octubre #65-30 <b>MANIZALES</b></span>
                     </div>
 
@@ -322,7 +325,7 @@
                             <a class="btn btn--outline btn--md" href="https://www.google.com/maps/dir/?api=1&amp;destination=5.070275,-75.513811" target="_blank" rel="noopener noreferrer">CÓMO LLEGAR
                                 <svg class="ico ico--sm" viewBox="0 0 19.233 15" aria-hidden="true"><use href="#ico-arrow"></use></svg>
                             </a>
-                            <a class="btn btn--primary btn--md" href="#reservas">RESERVA TU MESA</a>
+                            <button class="btn btn--primary btn--md" data-action="reserva" type="button">RESERVA TU MESA</button>
                         </div>
                     </div>
                 </div>
@@ -336,13 +339,13 @@
                 </div>
 
                 <div class="social-grid">
-                    <a class="social-card social-card--wide" href="https://www.instagram.com/pitstop.cafebar" target="_blank" rel="noopener noreferrer" aria-label="Instagram de Pit Stop Café Bar">
+                    <a class="social-card social-card--wide" href="https://www.instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram de Pit Stop Café Bar">
                         <img class="social-card__img" src="src/imgs/social-instagram.png" alt="">
                         <span class="chip chip--ghost social-card__badge">INSTAGRAM — 48K</span>
                         <span class="social-card__handle">@pitstop.cafebar</span>
                     </a>
 
-                    <a class="social-card social-card--stat" href="https://www.tiktok.com/@pitstop.cafebar" target="_blank" rel="noopener noreferrer" aria-label="TikTok de Pit Stop Café Bar">
+                    <a class="social-card social-card--stat" href="https://www.tiktok.com" target="_blank" rel="noopener noreferrer" aria-label="TikTok de Pit Stop Café Bar">
                         <span class="social-card__title">TikTok</span>
                         <span class="social-card__big">120K</span>
                         <span class="muted muted--sm">Pit stops en 15s</span>
@@ -351,16 +354,16 @@
                         </span>
                     </a>
 
-                    <a class="social-card social-card--yt" href="https://www.youtube.com/@pitstop.cafebar" target="_blank" rel="noopener noreferrer" aria-label="YouTube de Pit Stop Café Bar">
+                    <a class="social-card social-card--yt" href="https://www.youtube.com" target="_blank" rel="noopener noreferrer" aria-label="YouTube de Pit Stop Café Bar">
                         <img class="social-card__img" src="src/imgs/social-youtube.png" alt="">
                         <span class="chip chip--ghost social-card__badge">YOUTUBE</span>
                         <span class="muted muted--sm">Race debriefs cada lunes</span>
                     </a>
 
-                    <div class="social-card social-card--fb">
+                    <a class="social-card social-card--fb" href="https://www.facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook de Pit Stop Café Bar">
                         <span class="social-card__title">Facebook</span>
                         <span class="muted muted--sm">Eventos y Comunidad</span>
-                    </div>
+                    </a>
 
                     <div class="social-card social-card--wa">
                         <span class="social-card__title">WhatsApp Channel</span>
@@ -402,6 +405,70 @@
                 </div>
                 <p class="footer__note muted muted--xs">Contenido de demostración: fechas, aforo, seguidores y teléfono son datos de ejemplo pendientes de confirmación.</p>
             </footer>
+
+            <!-- Panel de reserva -->
+            <div class="reserva-panel" id="reserva-panel" role="dialog" aria-modal="true" aria-label="Reserva tu mesa" hidden>
+                <div class="reserva-panel__overlay" data-cerrar-reserva></div>
+                <div class="reserva-panel__card">
+                    <button class="reserva-panel__cerrar" data-cerrar-reserva aria-label="Cerrar panel de reserva">✕</button>
+                    <h2 class="reserva-panel__titulo">Reserva tu mesa</h2>
+                    <p class="reserva-panel__subtitulo">Completa los detalles y nos pondremos en contacto para confirmar.</p>
+                    <form class="reserva-panel__form" novalidate>
+                        <div class="reserva-panel__grupo">
+                            <label class="reserva-panel__label">Mesa para cuántos personas</label>
+                            <select class="reserva-panel__select" name="personas" required>
+                                <option value="">Selecciona</option>
+                                <option value="1">1 persona</option>
+                                <option value="2">2 personas</option>
+                                <option value="3">3 personas</option>
+                                <option value="4">4 personas</option>
+                                <option value="5">5 personas</option>
+                                <option value="6+">6 o más personas</option>
+                            </select>
+                        </div>
+                        <div class="reserva-panel__grupo">
+                            <label class="reserva-panel__label">Fecha</label>
+                            <input type="date" class="reserva-panel__input" name="fecha" required>
+                        </div>
+                        <div class="reserva-panel__grupo">
+                            <label class="reserva-panel__label">Hora</label>
+                            <input type="time" class="reserva-panel__input" name="hora" required>
+                        </div>
+                        <div class="reserva-panel__grupo">
+                            <label class="reserva-panel__label">Método de pago</label>
+                            <select class="reserva-panel__select" name="pago" required>
+                                <option value="">Selecciona</option>
+                                <option value="efectivo">Efectivo</option>
+                                <option value="tarjeta">Tarjeta de crédito/débito</option>
+                                <option value="transferencia">Transferencia bancaria</option>
+                            </select>
+                        </div>
+                        <div class="reserva-panel__grupo">
+                            <label class="reserva-panel__label">Pago por anticipación</label>
+                            <label class="reserva-panel__checkbox">
+                                <input type="checkbox" name="anticipo"> Sí, deseo pagar por anticipación
+                            </label>
+                        </div>
+                        <div class="reserva-panel__grupo">
+                            <label class="reserva-panel__label">¿Para qué ocasión será la reserva?</label>
+                            <input type="text" class="reserva-panel__input" name="ocasión" placeholder="Ej: Cumpleaños, cita de negocios, encuentro familiar...">
+                        </div>
+                        <div class="reserva-panel__grupo">
+                            <label class="reserva-panel__label">Nombre completo</label>
+                            <input type="text" class="reserva-panel__input" name="nombre" required>
+                        </div>
+                        <div class="reserva-panel__grupo">
+                            <label class="reserva-panel__label">Teléfono</label>
+                            <input type="tel" class="reserva-panel__input" name="telefono" required>
+                        </div>
+                        <div class="reserva-panel__grupo">
+                            <label class="reserva-panel__label">Correo electrónico</label>
+                            <input type="email" class="reserva-panel__input" name="correo" required>
+                        </div>
+                        <button class="reserva-panel__btn" type="submit">Enviar reserva</button>
+                    </form>
+                </div>
+            </div>
 
         </main>
     </div>
